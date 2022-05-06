@@ -37,5 +37,5 @@ res, err := c.GetTSPCodes(context.Background(), &ciscosmartbonding.ListParams{Li
 **Or use the convenience functions**
 
 ```go
-	res, err := c.GetAllTSPCodes(context.Background())
+res, err := c.GetAllTSPCodes(context.Background())
 ```

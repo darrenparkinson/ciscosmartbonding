@@ -1,6 +1,9 @@
 package ciscosmartbonding
 
-import "context"
+import (
+	"context"
+	"fmt"
+)
 
 // TspCode defines model for TspCode.
 type TspCode struct {
@@ -40,6 +43,12 @@ type ListParams struct {
 	Limit *int64 `url:"limit,omitempty" json:"limit,omitempty"`
 }
 
+// String function to enable nice output during testing
+func (l *ListParams) String() string {
+	return fmt.Sprintf("SinceId:%d MaxId:%d Limit:%d", l.GetSinceId(), l.GetMaxId(), l.GetLimit())
+}
+
+// GetAllTSPCodes is a convenience function to retrieve all TSP Codes
 func (c *Client) GetAllTSPCodes(ctx context.Context) ([]TspCode, error) {
 	slug := "/rest/v1/tsp-codes/"
 	codes := []TspCode{}
@@ -65,6 +74,7 @@ func (c *Client) GetAllTSPCodes(ctx context.Context) ([]TspCode, error) {
 	return codes, nil
 }
 
+// GetTSPCodes retrieves a list of TSP Codes with pagination options
 func (c *Client) GetTSPCodes(ctx context.Context, listParams ...*ListParams) (*TspCodeList, error) {
 	slug := "/rest/v1/tsp-codes/"
 	var tcl TspCodeList

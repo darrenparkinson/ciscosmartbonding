@@ -16,4 +16,5 @@ const (
 	ErrForbidden     = Err("ciscosmartbonding: forbidden")
 	ErrInternalError = Err("ciscosmartbonding: internal error")
 	ErrUnknown       = Err("ciscosmartbonding: unexpected error occurred")
+	ErrNotFound      = Err("ciscosmartbonding: not found")
 )

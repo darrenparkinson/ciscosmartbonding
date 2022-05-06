@@ -46,7 +46,7 @@ type CiscoError struct {
 // Client manages communication with the Cisco Smart Bonding API.
 type Client struct {
 	// BaseURL for the API.  Set to https://cisco-test.solvedirect.com/ws/ using `ciscosmartbonding.NewClient()`, or set directly.
-	BaseURL string
+	// BaseURL string
 
 	//RestyClient provides access to the resty client for using extra features
 	RestyClient *resty.Client
@@ -73,7 +73,7 @@ func NewClient(username, password string, r *resty.Client) *Client {
 	// token := base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password)))
 	// log.Println(token)
 	return &Client{
-		BaseURL:     apiURL,
+		// BaseURL:     apiURL,
 		RestyClient: r,
 		lim:         rl,
 		username:    username,
@@ -123,7 +123,10 @@ func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}
 	if err != nil {
 		return err
 	}
-	listParamsString, err := query.Values(listParams[0])
+	listParamsString := url.Values{}
+	if len(listParams) > 0 {
+		listParamsString, err = query.Values(listParams[0])
+	}
 	if err != nil {
 		return fmt.Errorf("%w: %s", ErrProcessingListParams, err)
 	}
@@ -147,6 +150,8 @@ func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}
 		smartbondingerr = ErrUnauthorized
 	case 403:
 		smartbondingerr = ErrForbidden
+	case 404:
+		smartbondingerr = ErrNotFound
 	case 500:
 		smartbondingerr = ErrInternalError
 	default:
@@ -200,11 +205,11 @@ func (c *Client) generateAuthToken() (*token, error) {
 
 // Bool is a helper routine that allocates a new bool value
 // to store v and returns a pointer to it.
-func Bool(v bool) *bool { return &v }
+// func Bool(v bool) *bool { return &v }
 
 // Int is a helper routine that allocates a new int value
 // to store v and returns a pointer to it.
-func Int(v int) *int { return &v }
+// func Int(v int) *int { return &v }
 
 // Int32 is a helper routine that allocates a new int32 value
 // to store v and returns a pointer to it.
@@ -216,7 +221,7 @@ func Int64(v int64) *int64 { return &v }
 
 // Float64 is a helper routine that allocates a new Float64 value
 // to store v and returns a pointer to it.
-func Float64(v float64) *float64 { return &v }
+// func Float64(v float64) *float64 { return &v }
 
 // String is a helper routine that allocates a new string value
 // to store v and returns a pointer to it.
