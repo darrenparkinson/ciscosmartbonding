@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         go version
-        go get -u golang.org/x/lint/golint
+        # go get -u golang.org/x/lint/golint
     - name: Build
       run: go build .
 
@@ -30,4 +30,4 @@ jobs:
     - name: Run Vet & Lint
       run: |
         go vet ./...
-        golint -set_exit_status=1 ./...
+        # golint -set_exit_status=1 ./...
