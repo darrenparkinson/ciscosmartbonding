@@ -1,9 +1,10 @@
 dist/
 env.sh
 .env
-examples/
+archive/
 openapi/
 coverage/
+cmd/sbcli/
 # Created by https://www.toptal.com/developers/gitignore/api/go,visualstudiocode,vim,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,visualstudiocode,vim,windows,macos
 
