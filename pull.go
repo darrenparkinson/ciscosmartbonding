@@ -6,7 +6,7 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-// PullUpdate makes a request for any ticket updates. It turns a CallData object, and also the
+// PullUpdate makes a request for any ticket updates. It returns a CallData object, and also the
 // resty response so that you can check for a 204 No Content in the resp.StatusCode() since that
 // is the only way you can tell to stop pulling for data.
 func (c *Client) PullUpdate(ctx context.Context) (*CallData, *resty.Response, error) {
