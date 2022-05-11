@@ -70,15 +70,11 @@ func NewClient(username, password string, r *resty.Client) *Client {
 
 	rl := rate.NewLimiter(150, 1) // this is not documented, so we'll limit to 150/s
 
-	// token := base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password)))
-	// log.Println(token)
 	return &Client{
-		// BaseURL:     apiURL,
 		RestyClient: r,
 		lim:         rl,
 		username:    username,
 		password:    password,
-		// basicAuthToken: token,
 	}
 
 }
@@ -116,10 +112,7 @@ func getNextLink(links []Link) (*ListParams, error) {
 }
 
 func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}, listParams ...*ListParams) error {
-	if !c.lim.Allow() {
-		c.lim.Wait(ctx)
-	}
-	err := c.getToken()
+	err := c.checkLimitAndGetToken(ctx)
 	if err != nil {
 		return err
 	}
@@ -142,6 +135,10 @@ func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}
 	if resp.IsSuccess() {
 		return nil
 	}
+	return parseErrorResponse(resp)
+}
+
+func parseErrorResponse(resp *resty.Response) error {
 	var smartbondingerr error
 	switch resp.StatusCode() {
 	case 400:
@@ -161,6 +158,17 @@ func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}
 		return fmt.Errorf("%w: %s", smartbondingerr, ce.Message)
 	}
 	return smartbondingerr
+}
+
+func (c *Client) checkLimitAndGetToken(ctx context.Context) error {
+	if !c.lim.Allow() {
+		c.lim.Wait(ctx)
+	}
+	err := c.getToken()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // getToken is a helper function to reuse an existing or retrieve a new token
