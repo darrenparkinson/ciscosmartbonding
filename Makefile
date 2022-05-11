@@ -12,7 +12,7 @@ help:
 # QUALITY CONTROL
 # ==================================================================================== #
 
-## audit: tidy and vendor dependencies and format, vet and test all code
+## audit: tidy dependencies and format, vet and test all code
 .PHONY: audit
 audit:
 	@echo 'Formatting code...'
