@@ -45,8 +45,6 @@ type CiscoError struct {
 
 // Client manages communication with the Cisco Smart Bonding API.
 type Client struct {
-	// BaseURL for the API.  Set to https://cisco-test.solvedirect.com/ws/ using `ciscosmartbonding.NewClient()`, or set directly.
-	// BaseURL string
 
 	//RestyClient provides access to the resty client for using extra features
 	RestyClient *resty.Client
@@ -61,6 +59,7 @@ type Client struct {
 }
 
 // NewClient creates a new API client.  You can pass in your own resty client, or use nil for a default one.
+// You can change the default test base URL after initialisation using client.RestyClient.SetBaseURL.
 func NewClient(username, password string, r *resty.Client) *Client {
 	if r == nil {
 		r = resty.New()
