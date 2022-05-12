@@ -1,0 +1,125 @@
+{
+    "Calls": {
+        "SDCallID": 425023546,
+        "CustCallID": "PartnerTicket001",
+        "SPCallID": "123456789",
+        "ShortDescription": " Title of the Ticket ",
+        "Description": "Long description of the issue",
+        "Remarks": "Notes from cisco",
+        "CallOpenTime": "2019-05-02T18:20:43.000+0000",
+        "CallStartSLATime": "2019-05-02T18:20:43.000+0000",
+        "CallAcknowledgeTime": "2019-05-02T18:20:43.000+0000",
+        "CHD": {
+            "PIN": "mwoods-partner",
+            "FirstName": "Mary",
+            "LastName": "Woods",
+            "Tel": "1-408-000-0000",
+            "Email": "mary.woods@partner.com",
+            "Sign": "B2B"
+        },
+        "MainComp": {
+            "Location": "123",
+            "SerNr": "C9K123456789",
+            "InvNr": "C987654321",
+            "Room": "P123456789"
+        },
+        "SubComp": {
+            "LocationStreet": "12345 Main Street",
+            "LocationName": "Suite 112/Gate 09",
+            "LocationTel": "3041",
+            "LocationCity": "Capital City",
+            "LocationProvince": "VA",
+            "LocationZip": "12345",
+            "LocationCategory": "Data Center",
+            "LocationOpSys": "562",
+            "Room": ""
+        },
+        "CCP": {
+            "Room": "S123456789",
+            "Fax": "Resolution-Code1",
+            "LocationCity": "High",
+            "PIN": "961",
+            "Department": "871751",
+            "LocationStreet": "Device was rebooted",
+            "FirstName": "Max",
+            "LastName": "Mustermann",
+            "Tel": "1-919-000-0000",
+            "Email": "mmuster@cisco.com"
+        },
+        "Caller": {
+            "Title": "ACME Inc.",
+            "FirstName": "William",
+            "LastName": "Sampler",
+            "Tel": "1-512-000-0000",
+            "Email": "wsampler@company.com"
+        },
+        "ExtTableValues": {
+            "Field1": "deliveries accepted between 9AM and 3PM only",
+            "Field2": "please ensure all seals are intact before opening",
+            "Field11": "Jane Doe, Reception",
+            "Field13": "09:00",
+            "Field14": "15:00",
+            "Field16": "Tech Management",
+            "Field17": "2nd Floor",
+            "Field18": "No",
+            "Field19": "Replace Part",
+            "Field20": "Router",
+            "Field21": "None",
+            "Field25": "United States",
+            "Field26": "1",
+            "Field104": "10/08/2021 08:20",
+            "Field105": "10/08/2021 08:25",
+            "Field106": "10/12/2021 16:32",
+            "Field107": "RMA123456",
+            "Field108": "VendINC123",
+            "Field109": "Vendor",
+            "Field110": "Yes",
+            "Field111": "Router Cat9K",
+            "Field112": "Power",
+            "Field113": "Simon",
+            "Field114": "Smith",
+            "Field115": "1-855-000-0000",
+            "Field116": "simon.smith@vendor.com"
+        },
+        "Contracts": {
+            "ShortName": "PLSS-Partner1",
+            "Name": "PLSS-Partner1",
+            "BPartnerShortNameCust": "PLSS-Partner1",
+            "BPOrganizationShortNameCust": "INC",
+            "BPartnerShortNameProv": "SD_CORE",
+            "BPOrganizationShortNameProv": "CORE_SP",
+            "ContractIDProv": "SP/B2B/B2B/cisco-test"
+        },
+        "ContractElements": {
+            "ShortName": "Incident",
+            "Name": "Incident"
+        },
+        "RequestTypes": {},
+        "CallStates": {
+            "ShortName": "acknowledge",
+            "Name": "Incident acknowledged"
+        },
+        "Priorities": {
+            "ShortName": "Shadow",
+            "Name": "Shadow"
+        },
+        "Severities": {
+            "ShortName": "1",
+            "Name": "Critical"
+        },
+        "FailureTypes": {
+            "ShortName": "1",
+            "Name": "Failure Type 1"
+        },
+        "Queues1": {},
+        "Queues2": {},
+        "Queues3": {},
+        "Locations": {},
+        "CallAdditionals": [],
+        "ParentCall": {},
+        "CallCalculations": {},
+        "CallActivities": [],
+        "DeviceMovements": [],
+        "Appointments": []
+    }
+}

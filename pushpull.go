@@ -1,9 +1,5 @@
 package ciscosmartbonding
 
-import (
-	"time"
-)
-
 // AttachmentsHolder defines model for AttachmentsHolder.
 type AttachmentsHolder struct {
 	DataBase64 *string  `json:"DataBase64,omitempty"`
@@ -15,17 +11,17 @@ type AttachmentsHolder struct {
 type CallActivitiesHolder struct {
 	ActivityType      *EntityTypesHolder `json:"ActivityType,omitempty"`
 	BPPShortName      *string            `json:"BPPShortName,omitempty"`
-	BackTime          *time.Time         `json:"BackTime,omitempty"`
-	BusyTime          *time.Time         `json:"BusyTime,omitempty"`
+	BackTime          *CiscoDateTime     `json:"BackTime,omitempty"`
+	BusyTime          *CiscoDateTime     `json:"BusyTime,omitempty"`
 	Distance          *int32             `json:"Distance,omitempty"`
 	TravelBackMinutes *int32             `json:"TravelBackMinutes,omitempty"`
 	TravelBackRemarks *string            `json:"TravelBackRemarks,omitempty"`
 	TravelMinutes     *int32             `json:"TravelMinutes,omitempty"`
 	TravelRemarks     *string            `json:"TravelRemarks,omitempty"`
-	WorkEndTime       *time.Time         `json:"WorkEndTime,omitempty"`
+	WorkEndTime       *CiscoDateTime     `json:"WorkEndTime,omitempty"`
 	WorkMinutes       *int32             `json:"WorkMinutes,omitempty"`
 	WorkRemarks       *string            `json:"WorkRemarks,omitempty"`
-	WorkStartTime     *time.Time         `json:"WorkStartTime,omitempty"`
+	WorkStartTime     *CiscoDateTime     `json:"WorkStartTime,omitempty"`
 }
 
 // CallAdditionalsHolder defines model for CallAdditionalsHolder.
@@ -118,7 +114,7 @@ type CallAdditionalsHolder struct {
 type CallCalculationsHolder struct {
 	ChargingTypes        *ChargingTypesHolder `json:"ChargingTypes,omitempty"`
 	ContractShortName    *string              `json:"ContractShortName,omitempty"`
-	RequestedWorkEndTime *time.Time           `json:"RequestedWorkEndTime,omitempty"`
+	RequestedWorkEndTime *CiscoDateTime       `json:"RequestedWorkEndTime,omitempty"`
 	Revenue              *float32             `json:"Revenue,omitempty"`
 	ServiceType          *string              `json:"ServiceType,omitempty"`
 }
@@ -390,13 +386,13 @@ type InboundCallsHolder struct {
 	AddRemarksToSummary        *string           `json:"AddRemarksToSummary,omitempty"`
 	CCP                        *PersonsHolder    `json:"CCP,omitempty"`
 	CHD                        *PersonsHolder    `json:"CHD,omitempty"`
-	CallAcknowledgeTime        *time.Time        `json:"CallAcknowledgeTime,omitempty"`
-	CallCloseTime              *time.Time        `json:"CallCloseTime,omitempty"`
-	CallOpenTime               *time.Time        `json:"CallOpenTime,omitempty"`
-	CallRecoveryTime           *time.Time        `json:"CallRecoveryTime,omitempty"`
-	CallResponseTime           *time.Time        `json:"CallResponseTime,omitempty"`
-	CallSendTime               *time.Time        `json:"CallSendTime,omitempty"`
-	CallStartSLATime           *time.Time        `json:"CallStartSLATime,omitempty"`
+	CallAcknowledgeTime        *CiscoDateTime    `json:"CallAcknowledgeTime,omitempty"`
+	CallCloseTime              *CiscoDateTime    `json:"CallCloseTime,omitempty"`
+	CallOpenTime               *CiscoDateTime    `json:"CallOpenTime,omitempty"`
+	CallRecoveryTime           *CiscoDateTime    `json:"CallRecoveryTime,omitempty"`
+	CallResponseTime           *CiscoDateTime    `json:"CallResponseTime,omitempty"`
+	CallSendTime               *CiscoDateTime    `json:"CallSendTime,omitempty"`
+	CallStartSLATime           *CiscoDateTime    `json:"CallStartSLATime,omitempty"`
 	Caller                     *PersonsHolder    `json:"Caller,omitempty"`
 	CustCallID                 *string           `json:"CustCallID,omitempty"`
 	CustomerCategory1          *string           `json:"CustomerCategory1,omitempty"`
@@ -409,15 +405,15 @@ type InboundCallsHolder struct {
 	CustomerReasonCategory3    *string           `json:"CustomerReasonCategory3,omitempty"`
 	CustomerReasonCategory4    *string           `json:"CustomerReasonCategory4,omitempty"`
 	CustomerReasonCategory5    *string           `json:"CustomerReasonCategory5,omitempty"`
-	CustomerRequestedEndTime   *time.Time        `json:"CustomerRequestedEndTime,omitempty"`
-	CustomerRequestedStartTime *time.Time        `json:"CustomerRequestedStartTime,omitempty"`
+	CustomerRequestedEndTime   *CiscoDateTime    `json:"CustomerRequestedEndTime,omitempty"`
+	CustomerRequestedStartTime *CiscoDateTime    `json:"CustomerRequestedStartTime,omitempty"`
 	Description                *string           `json:"Description,omitempty"`
 	Diagnosis                  *string           `json:"Diagnosis,omitempty"`
 	MainComp                   *ComponentsHolder `json:"MainComp,omitempty"`
 	Notes                      *CallNotesHolder  `json:"Notes,omitempty"`
 	Ownership                  *string           `json:"Ownership,omitempty"`
 	PartnerCoreTicketId        *float32          `json:"PartnerCoreTicketId,omitempty"`
-	ProblemStartTime           *time.Time        `json:"ProblemStartTime,omitempty"`
+	ProblemStartTime           *CiscoDateTime    `json:"ProblemStartTime,omitempty"`
 	ProviderCategory1          *string           `json:"ProviderCategory1,omitempty"`
 	ProviderCategory2          *string           `json:"ProviderCategory2,omitempty"`
 	ProviderCategory3          *string           `json:"ProviderCategory3,omitempty"`
@@ -428,8 +424,8 @@ type InboundCallsHolder struct {
 	ProviderReasonCategory3    *string           `json:"ProviderReasonCategory3,omitempty"`
 	ProviderReasonCategory4    *string           `json:"ProviderReasonCategory4,omitempty"`
 	ProviderReasonCategory5    *string           `json:"ProviderReasonCategory5,omitempty"`
-	ProviderScheduledEndTime   *time.Time        `json:"ProviderScheduledEndTime,omitempty"`
-	ProviderScheduledStartTime *time.Time        `json:"ProviderScheduledStartTime,omitempty"`
+	ProviderScheduledEndTime   *CiscoDateTime    `json:"ProviderScheduledEndTime,omitempty"`
+	ProviderScheduledStartTime *CiscoDateTime    `json:"ProviderScheduledStartTime,omitempty"`
 	Remarks                    *string           `json:"Remarks,omitempty"`
 	SDCallID                   *float32          `json:"SDCallID,omitempty"`
 	SPCallID                   *string           `json:"SPCallID,omitempty"`
