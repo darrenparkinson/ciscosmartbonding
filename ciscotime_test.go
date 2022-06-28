@@ -34,3 +34,19 @@ func TestCiscoTime(t *testing.T) {
 		})
 	}
 }
+
+func TestCiscoTimeNull(t *testing.T) {
+	var got CiscoDateTime
+	err := json.Unmarshal([]byte("null"), &got)
+	if err != nil {
+		t.Fatalf("returned %+v, wanted %+v", err, nil)
+	}
+}
+
+func TestCiscoTimeError(t *testing.T) {
+	var got CiscoDateTime
+	err := json.Unmarshal([]byte(`"2022-01-01"`), &got)
+	if err == nil {
+		t.Fatalf("returned %+v, wanted error", nil)
+	}
+}
