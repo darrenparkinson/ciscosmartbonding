@@ -125,8 +125,9 @@ type CallData struct {
 	CallActivities   *[]CallActivitiesHolder        `json:"CallActivities,omitempty"`
 	CallAdditionals  *[]CallAdditionalsHolder       `json:"CallAdditionals,omitempty"`
 	CallCalculations *CallCalculationsHolder        `json:"CallCalculations,omitempty"`
-	CallStates       *CallSystemCodesHolder         `json:"CallStates,omitempty"`
-	Calls            InboundCallsHolder             `json:"Calls"`
+	CallStates       *CallSystemCodesHolder         `json:"CallStates,omitempty"`    // Ticket Status of the ticket/case e.g. "In Progress" (from list). M for Create/Update.
+	CallStatesSPR    *CallSystemCodesHolder         `json:"CallStatesSPR,omitempty"` // TAC Ticket Status
+	Calls            *InboundCallsHolder            `json:"Calls,omitempty"`
 	ContractElements *InboundContractElementsHolder `json:"ContractElements,omitempty"`
 	Contracts        *InboundContractsHolder        `json:"Contracts,omitempty"`
 	Control          *ControlFlagsHolder            `json:"Control,omitempty"`
@@ -137,13 +138,13 @@ type CallData struct {
 	Impacts          *CallSystemCodesHolder         `json:"Impacts,omitempty"`
 	Locations        *LocationsHolder               `json:"Locations,omitempty"`
 	ParentCall       *ParentCallsHolder             `json:"ParentCall,omitempty"`
-	Priorities       *CallSystemCodesHolder         `json:"Priorities,omitempty"`
+	Priorities       *CallSystemCodesHolder         `json:"Priorities,omitempty"` // Urgency of the ticket/case (shadow or escalated case) e.g. "Shadow" (from list). M on Create.
 	ProblemTypes     *CallSystemCodesHolder         `json:"ProblemTypes,omitempty"`
 	Queues1          *QueuesHolder                  `json:"Queues1,omitempty"`
 	Queues2          *QueuesHolder                  `json:"Queues2,omitempty"`
 	Queues3          *QueuesHolder                  `json:"Queues3,omitempty"`
 	RequestTypes     *CallSystemCodesHolder         `json:"RequestTypes,omitempty"`
-	Severities       *CallSystemCodesHolder         `json:"Severities,omitempty"`
+	Severities       *CallSystemCodesHolder         `json:"Severities,omitempty"` // Severity of the ticket/case e.g. "MED" (from list). M for Create.
 	Urgency          *CallSystemCodesHolder         `json:"Urgency,omitempty"`
 }
 
@@ -155,20 +156,20 @@ type CallExtensionsHolder struct {
 	Field101 *string `json:"Field101,omitempty"`
 	Field102 *string `json:"Field102,omitempty"`
 	Field103 *string `json:"Field103,omitempty"`
-	Field104 *string `json:"Field104,omitempty"`
-	Field105 *string `json:"Field105,omitempty"`
-	Field106 *string `json:"Field106,omitempty"`
-	Field107 *string `json:"Field107,omitempty"`
-	Field108 *string `json:"Field108,omitempty"`
-	Field109 *string `json:"Field109,omitempty"`
-	Field11  *string `json:"Field11,omitempty"`
-	Field110 *string `json:"Field110,omitempty"`
-	Field111 *string `json:"Field111,omitempty"`
-	Field112 *string `json:"Field112,omitempty"`
-	Field113 *string `json:"Field113,omitempty"`
-	Field114 *string `json:"Field114,omitempty"`
-	Field115 *string `json:"Field115,omitempty"`
-	Field116 *string `json:"Field116,omitempty"`
+	Field104 *string `json:"Field104,omitempty"` // Partner Ticket Open Date & Time. M for Create.
+	Field105 *string `json:"Field105,omitempty"` // Partner ticket acceptance time. M for Update.
+	Field106 *string `json:"Field106,omitempty"` // Partner Ticket Closed Date & Time. M for Update (on closure).
+	Field107 *string `json:"Field107,omitempty"` // RMA # associated with partner ticket.
+	Field108 *string `json:"Field108,omitempty"` // 3rd Party Case Number e.g. "VendINC123". M for Create.
+	Field109 *string `json:"Field109,omitempty"` // 3rd Party Product Vendor Name e.g. "vendor". M for Create.
+	Field11  *string `json:"Field11,omitempty"`  // Recipient / Site Contact. M for Create (Premium).
+	Field110 *string `json:"Field110,omitempty"` // Customer 3rd Party Support Contract Active (customer/partner) e.g. "Yes".
+	Field111 *string `json:"Field111,omitempty"` // 3rd Party Suspected Product Name e.g. "Router Cat9K". M for Create.
+	Field112 *string `json:"Field112,omitempty"` // 3rd Party Suspected Product Issue e.g. "Power". M for Create.
+	Field113 *string `json:"Field113,omitempty"` // 3rd Party Main Contact First Name (case owner) e.g. "Simon". M for Create.
+	Field114 *string `json:"Field114,omitempty"` // 3rd Party Main Contact Last Name(case owner) e.g. "Smith". M for Create.
+	Field115 *string `json:"Field115,omitempty"` // 3rd Party Contact Telephone (case owner) e.g. "1-855-000-0000". M for Create.
+	Field116 *string `json:"Field116,omitempty"` // 3rd Party Contact Email (case owner) e.g. simon.smith@vendor.com. M for Create.
 	Field117 *string `json:"Field117,omitempty"`
 	Field118 *string `json:"Field118,omitempty"`
 	Field119 *string `json:"Field119,omitempty"`
@@ -182,8 +183,8 @@ type CallExtensionsHolder struct {
 	Field126 *string `json:"Field126,omitempty"`
 	Field127 *string `json:"Field127,omitempty"`
 	Field128 *string `json:"Field128,omitempty"`
-	Field13  *string `json:"Field13,omitempty"`
-	Field14  *string `json:"Field14,omitempty"`
+	Field13  *string `json:"Field13,omitempty"` // Site Availability From in  yyyy-MM-dd HH:mm:ss | | dd-MM-yyyy HH:mm:ss format. M for Create (Premium)
+	Field14  *string `json:"Field14,omitempty"` // Site Availability To in  yyyy-MM-dd HH:mm:ss | | dd-MM-yyyy HH:mm:ss format. M for Create (Premium)
 	Field15  *string `json:"Field15,omitempty"`
 	Field16  *string `json:"Field16,omitempty"`
 	Field17  *string `json:"Field17,omitempty"`
@@ -191,12 +192,12 @@ type CallExtensionsHolder struct {
 	Field19  *string `json:"Field19,omitempty"`
 	Field2   *string `json:"Field2,omitempty"`
 	Field20  *string `json:"Field20,omitempty"`
-	Field21  *string `json:"Field21,omitempty"`
+	Field21  *string `json:"Field21,omitempty"` // Security Clearance Code e.g. "None". M for Create (Premium).
 	Field22  *string `json:"Field22,omitempty"`
 	Field23  *string `json:"Field23,omitempty"`
 	Field24  *string `json:"Field24,omitempty"`
-	Field25  *string `json:"Field25,omitempty"`
-	Field26  *string `json:"Field26,omitempty"`
+	Field25  *string `json:"Field25,omitempty"` // Ship To Address - Country. M for Create.
+	Field26  *string `json:"Field26,omitempty"` // Ship To Country Code e.g. 1. M for Create.
 	Field27  *string `json:"Field27,omitempty"`
 	Field28  *string `json:"Field28,omitempty"`
 	Field29  *string `json:"Field29,omitempty"`
@@ -303,27 +304,27 @@ type ComponentsHolder struct {
 	Description         *string  `json:"Description,omitempty"`
 	Hostname            *string  `json:"Hostname,omitempty"`
 	IPAddress           *string  `json:"IPAddress,omitempty"`
-	InvNr               *string  `json:"InvNr,omitempty"`
-	Location            *string  `json:"Location,omitempty"`
-	LocationCategory    *string  `json:"LocationCategory,omitempty"`
-	LocationCity        *string  `json:"LocationCity,omitempty"`
+	InvNr               *string  `json:"InvNr,omitempty"`            // Cisco Contract ID (Partner Contract Number). Must match Cisco DB.
+	Location            *string  `json:"Location,omitempty"`         // Install Site ID
+	LocationCategory    *string  `json:"LocationCategory,omitempty"` // Site Type e.g. Data Center. M for Create (Premium).
+	LocationCity        *string  `json:"LocationCity,omitempty"`     // For SubComp, "Ship To Address - City". M for Create.
 	LocationCountry     *string  `json:"LocationCountry,omitempty"`
 	LocationDescription *string  `json:"LocationDescription,omitempty"`
 	LocationLevel       *float32 `json:"LocationLevel,omitempty"`
 	LocationName        *string  `json:"LocationName,omitempty"`
-	LocationProvince    *string  `json:"LocationProvince,omitempty"`
+	LocationProvince    *string  `json:"LocationProvince,omitempty"` // Ship To Address - State/Territory. M for Create.
 	LocationRegion      *string  `json:"LocationRegion,omitempty"`
-	LocationStreet      *string  `json:"LocationStreet,omitempty"`
+	LocationStreet      *string  `json:"LocationStreet,omitempty"` // For SubComp, Ship To Address - Line 1. M for Create.
 	LocationTel         *string  `json:"LocationTel,omitempty"`
-	LocationZip         *string  `json:"LocationZip,omitempty"`
+	LocationZip         *string  `json:"LocationZip,omitempty"` // Ship To Address - Postal Code. M for Create.
 	MACAddress          *string  `json:"MACAddress,omitempty"`
 	Manufacturer        *string  `json:"Manufacturer,omitempty"`
 	Model               *string  `json:"Model,omitempty"`
 	Name                *string  `json:"Name,omitempty"`
 	OpSys               *string  `json:"OpSys,omitempty"`
-	Room                *string  `json:"Room,omitempty"`
+	Room                *string  `json:"Room,omitempty"` // Product ID for Entitlement (Software). Must match Cisco DB.
 	SerNr               *string  `json:"SerNr,omitempty"`
-	SerNrProv           *string  `json:"SerNrProv,omitempty"`
+	SerNrProv           *string  `json:"SerNrProv,omitempty"` // Serial Number used for Entitlement (Hardware). Must match Cisco DB.
 	ShortName           *string  `json:"ShortName,omitempty"`
 	Type                *string  `json:"Type,omitempty"`
 }
@@ -383,65 +384,65 @@ type EntityTypesHolder struct {
 
 // InboundCallsHolder defines model for InboundCallsHolder.
 type InboundCallsHolder struct {
-	AddRemarksToSummary        *string           `json:"AddRemarksToSummary,omitempty"`
-	CCP                        *PersonsHolder    `json:"CCP,omitempty"`
-	CHD                        *PersonsHolder    `json:"CHD,omitempty"`
-	CallAcknowledgeTime        *CiscoDateTime    `json:"CallAcknowledgeTime,omitempty"`
-	CallCloseTime              *CiscoDateTime    `json:"CallCloseTime,omitempty"`
-	CallOpenTime               *CiscoDateTime    `json:"CallOpenTime,omitempty"`
-	CallRecoveryTime           *CiscoDateTime    `json:"CallRecoveryTime,omitempty"`
-	CallResponseTime           *CiscoDateTime    `json:"CallResponseTime,omitempty"`
-	CallSendTime               *CiscoDateTime    `json:"CallSendTime,omitempty"`
-	CallStartSLATime           *CiscoDateTime    `json:"CallStartSLATime,omitempty"`
-	Caller                     *PersonsHolder    `json:"Caller,omitempty"`
-	CustCallID                 *string           `json:"CustCallID,omitempty"`
-	CustomerCategory1          *string           `json:"CustomerCategory1,omitempty"`
-	CustomerCategory2          *string           `json:"CustomerCategory2,omitempty"`
-	CustomerCategory3          *string           `json:"CustomerCategory3,omitempty"`
-	CustomerCategory4          *string           `json:"CustomerCategory4,omitempty"`
-	CustomerCategory5          *string           `json:"CustomerCategory5,omitempty"`
-	CustomerReasonCategory1    *string           `json:"CustomerReasonCategory1,omitempty"`
-	CustomerReasonCategory2    *string           `json:"CustomerReasonCategory2,omitempty"`
-	CustomerReasonCategory3    *string           `json:"CustomerReasonCategory3,omitempty"`
-	CustomerReasonCategory4    *string           `json:"CustomerReasonCategory4,omitempty"`
-	CustomerReasonCategory5    *string           `json:"CustomerReasonCategory5,omitempty"`
-	CustomerRequestedEndTime   *CiscoDateTime    `json:"CustomerRequestedEndTime,omitempty"`
-	CustomerRequestedStartTime *CiscoDateTime    `json:"CustomerRequestedStartTime,omitempty"`
-	Description                *string           `json:"Description,omitempty"`
-	Diagnosis                  *string           `json:"Diagnosis,omitempty"`
-	MainComp                   *ComponentsHolder `json:"MainComp,omitempty"`
-	Notes                      *CallNotesHolder  `json:"Notes,omitempty"`
-	Ownership                  *string           `json:"Ownership,omitempty"`
-	PartnerCoreTicketId        *float32          `json:"PartnerCoreTicketId,omitempty"`
-	ProblemStartTime           *CiscoDateTime    `json:"ProblemStartTime,omitempty"`
-	ProviderCategory1          *string           `json:"ProviderCategory1,omitempty"`
-	ProviderCategory2          *string           `json:"ProviderCategory2,omitempty"`
-	ProviderCategory3          *string           `json:"ProviderCategory3,omitempty"`
-	ProviderCategory4          *string           `json:"ProviderCategory4,omitempty"`
-	ProviderCategory5          *string           `json:"ProviderCategory5,omitempty"`
-	ProviderReasonCategory1    *string           `json:"ProviderReasonCategory1,omitempty"`
-	ProviderReasonCategory2    *string           `json:"ProviderReasonCategory2,omitempty"`
-	ProviderReasonCategory3    *string           `json:"ProviderReasonCategory3,omitempty"`
-	ProviderReasonCategory4    *string           `json:"ProviderReasonCategory4,omitempty"`
-	ProviderReasonCategory5    *string           `json:"ProviderReasonCategory5,omitempty"`
-	ProviderScheduledEndTime   *CiscoDateTime    `json:"ProviderScheduledEndTime,omitempty"`
-	ProviderScheduledStartTime *CiscoDateTime    `json:"ProviderScheduledStartTime,omitempty"`
-	Remarks                    *string           `json:"Remarks,omitempty"`
-	SDCallID                   *float32          `json:"SDCallID,omitempty"`
-	SPCallID                   *string           `json:"SPCallID,omitempty"`
-	ShortDescription           *string           `json:"ShortDescription,omitempty"`
-	Solution                   *string           `json:"Solution,omitempty"`
-	SubComp                    *ComponentsHolder `json:"SubComp,omitempty"`
-	SysSpecField1              *string           `json:"SysSpecField1,omitempty"`
-	SysSpecField10             *string           `json:"SysSpecField10,omitempty"`
-	SysSpecField2              *string           `json:"SysSpecField2,omitempty"`
-	SysSpecField3              *string           `json:"SysSpecField3,omitempty"`
-	SysSpecField4              *string           `json:"SysSpecField4,omitempty"`
-	SysSpecField5              *string           `json:"SysSpecField5,omitempty"`
-	SysSpecField6              *string           `json:"SysSpecField6,omitempty"`
-	SysSpecField7              *string           `json:"SysSpecField7,omitempty"`
-	SysSpecField8              *string           `json:"SysSpecField8,omitempty"`
-	SysSpecField9              *string           `json:"SysSpecField9,omitempty"`
+	AddRemarksToSummary        *string            `json:"AddRemarksToSummary,omitempty"`
+	CCP                        *PersonsHolder     `json:"CCP,omitempty"` // TAC Engineer Details
+	CHD                        *PersonsHolder     `json:"CHD,omitempty"` // Partner Primary Contact / Information. First, Last, Tel, Email, Sign M for Create.
+	CallAcknowledgeTime        *CiscoDateTime     `json:"CallAcknowledgeTime,omitempty"`
+	CallCloseTime              *CiscoDateTime     `json:"CallCloseTime,omitempty"`
+	CallOpenTime               *CiscoDateTime     `json:"CallOpenTime,omitempty"`
+	CallRecoveryTime           *CiscoDateTime     `json:"CallRecoveryTime,omitempty"`
+	CallResponseTime           *CiscoDateTime     `json:"CallResponseTime,omitempty"`
+	CallSendTime               *CiscoDateTime     `json:"CallSendTime,omitempty"`
+	CallStartSLATime           *CiscoDateTime     `json:"CallStartSLATime,omitempty"`
+	Caller                     *PersonsHolder     `json:"Caller,omitempty"`     // End Customer Information. First, Last and Email M for Create.
+	CustCallID                 *string            `json:"CustCallID,omitempty"` // PARTNER Networks ticket ID e.g. INC000456. M for Create/Update.
+	CustomerCategory1          *string            `json:"CustomerCategory1,omitempty"`
+	CustomerCategory2          *string            `json:"CustomerCategory2,omitempty"`
+	CustomerCategory3          *string            `json:"CustomerCategory3,omitempty"`
+	CustomerCategory4          *string            `json:"CustomerCategory4,omitempty"`
+	CustomerCategory5          *string            `json:"CustomerCategory5,omitempty"`
+	CustomerReasonCategory1    *string            `json:"CustomerReasonCategory1,omitempty"` // Technology Code for entitlement - can be sent as number or text e.g. "13" or "LAN Switching" (from list). M for Create.
+	CustomerReasonCategory2    *string            `json:"CustomerReasonCategory2,omitempty"` // Sub-Technology Code for entitlement - can be sent as number or text e.g. "5190" or Cat9500X" (from list). M for Create.
+	CustomerReasonCategory3    *string            `json:"CustomerReasonCategory3,omitempty"` // Problem Code for entitlement e.g. "INSTLL_UNSTLL_UPGRD" (from list). M for Create.
+	CustomerReasonCategory4    *string            `json:"CustomerReasonCategory4,omitempty"`
+	CustomerReasonCategory5    *string            `json:"CustomerReasonCategory5,omitempty"`
+	CustomerRequestedEndTime   *CiscoDateTime     `json:"CustomerRequestedEndTime,omitempty"`
+	CustomerRequestedStartTime *CiscoDateTime     `json:"CustomerRequestedStartTime,omitempty"`
+	Description                *string            `json:"Description,omitempty"` // Description of Ticket e.g "No internet connection on Location XXX, Router shows no green lights, Error Message YYY on interface". M for Create.
+	Diagnosis                  *string            `json:"Diagnosis,omitempty"`
+	MainComp                   *ComponentsHolder  `json:"MainComp,omitempty"`
+	Notes                      []*CallNotesHolder `json:"Notes,omitempty"`
+	Ownership                  *string            `json:"Ownership,omitempty"`
+	PartnerCoreTicketId        *float32           `json:"PartnerCoreTicketId,omitempty"`
+	ProblemStartTime           *CiscoDateTime     `json:"ProblemStartTime,omitempty"`
+	ProviderCategory1          *string            `json:"ProviderCategory1,omitempty"`
+	ProviderCategory2          *string            `json:"ProviderCategory2,omitempty"`
+	ProviderCategory3          *string            `json:"ProviderCategory3,omitempty"`
+	ProviderCategory4          *string            `json:"ProviderCategory4,omitempty"`
+	ProviderCategory5          *string            `json:"ProviderCategory5,omitempty"`
+	ProviderReasonCategory1    *string            `json:"ProviderReasonCategory1,omitempty"`
+	ProviderReasonCategory2    *string            `json:"ProviderReasonCategory2,omitempty"`
+	ProviderReasonCategory3    *string            `json:"ProviderReasonCategory3,omitempty"`
+	ProviderReasonCategory4    *string            `json:"ProviderReasonCategory4,omitempty"`
+	ProviderReasonCategory5    *string            `json:"ProviderReasonCategory5,omitempty"`
+	ProviderScheduledEndTime   *CiscoDateTime     `json:"ProviderScheduledEndTime,omitempty"`
+	ProviderScheduledStartTime *CiscoDateTime     `json:"ProviderScheduledStartTime,omitempty"`
+	Remarks                    *string            `json:"Remarks,omitempty"`          // Comments sent during ticket updates (e.g. work log)
+	SDCallID                   *float32           `json:"SDCallID,omitempty"`         // ServiceGrid ticket ID e.g. 1340036031
+	SPCallID                   *string            `json:"SPCallID,omitempty"`         // Cisco TAC CSOne ticket ID e.g. 692072147
+	ShortDescription           *string            `json:"ShortDescription,omitempty"` // Subject of Ticket when Created e.g. "Network issue in Location XXX". M for Create.
+	Solution                   *string            `json:"Solution,omitempty"`         // The resolution notes sent over when ticket is RESOLVED. M on Update Resolved.
+	SubComp                    *ComponentsHolder  `json:"SubComp,omitempty"`
+	SysSpecField1              *string            `json:"SysSpecField1,omitempty"`
+	SysSpecField10             *string            `json:"SysSpecField10,omitempty"`
+	SysSpecField2              *string            `json:"SysSpecField2,omitempty"`
+	SysSpecField3              *string            `json:"SysSpecField3,omitempty"`
+	SysSpecField4              *string            `json:"SysSpecField4,omitempty"`
+	SysSpecField5              *string            `json:"SysSpecField5,omitempty"`
+	SysSpecField6              *string            `json:"SysSpecField6,omitempty"`
+	SysSpecField7              *string            `json:"SysSpecField7,omitempty"`
+	SysSpecField8              *string            `json:"SysSpecField8,omitempty"`
+	SysSpecField9              *string            `json:"SysSpecField9,omitempty"`
 }
 
 // InboundContractElementsHolder defines model for InboundContractElementsHolder.
@@ -463,7 +464,7 @@ type InboundContractElementsHolder struct {
 	ProviderCategory3 *string `json:"ProviderCategory3,omitempty"`
 	ProviderCategory4 *string `json:"ProviderCategory4,omitempty"`
 	ProviderCategory5 *string `json:"ProviderCategory5,omitempty"`
-	ShortName         *string `json:"ShortName,omitempty"`
+	ShortName         *string `json:"ShortName,omitempty"` // A unique value required in SG (will be provided by SG to PARTNER) e.g. 1190048357. M for Create.
 }
 
 // InboundContractsHolder defines model for InboundContractsHolder.
@@ -479,7 +480,7 @@ type InboundContractsHolder struct {
 	NewName                     *string `json:"NewName,omitempty"`
 	NewShortName                *string `json:"NewShortName,omitempty"`
 	ProvIDCust                  *string `json:"ProvIDCust,omitempty"`
-	ShortName                   *string `json:"ShortName,omitempty"`
+	ShortName                   *string `json:"ShortName,omitempty"` // A unique value required in SG (will be provided by SG to PARTNER) e.g. 1190048450. M for Create.
 }
 
 // IntegerKeyField defines model for IntegerKeyField.
@@ -517,14 +518,14 @@ type PersonsHolder struct {
 	LocationStreet   *string `json:"LocationStreet,omitempty"`
 	LocationZip      *string `json:"LocationZip,omitempty"`
 	MobileTel        *string `json:"MobileTel,omitempty"`
-	PIN              *string `json:"PIN,omitempty"`
-	Room             *string `json:"Room,omitempty"`
+	PIN              *string `json:"PIN,omitempty"`  // For CHD, CCO ID for the case used for entitlement. M for Create.
+	Room             *string `json:"Room,omitempty"` // For CCP, Subscription ID (if needed to pass entitlement).
 	Salutation       *string `json:"Salutation,omitempty"`
 	ShortName        *string `json:"ShortName,omitempty"`
-	Sign             *string `json:"Sign,omitempty"`
+	Sign             *string `json:"Sign,omitempty"` // For CHD, Preferred communication method. M for Create.
 	Tel              *string `json:"Tel,omitempty"`
 	Tel2             *string `json:"Tel2,omitempty"`
-	Title            *string `json:"Title,omitempty"`
+	Title            *string `json:"Title,omitempty"` // For Caller, this is apparently "Ship To Customer Company"?
 }
 
 // QueuesHolder defines model for QueuesHolder.

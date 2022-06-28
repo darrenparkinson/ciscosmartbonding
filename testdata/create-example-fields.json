@@ -1,0 +1,100 @@
+{
+	"Calls": {
+		"CustCallID": "PartnerTicket001",
+		"ShortDescription": "Title of Ticket",
+		"Description": "test ticket - long description of the issue",
+		"Remarks": "additional notes",
+		"CustomerRequestedStartTime": "2022-04-01 10:20:00",
+		"CustomerRequestedEndTime": "2022-04-01 10:20:00",
+		"CustomerReasonCategory1": "Cisco Technology Code",
+		"CustomerReasonCategory2": "Cisco Sub-Technology Code",
+		"CustomerReasonCategory3": "Cisco Problem Code",
+		"Caller": {
+			"LastName": "Sampler",
+			"FirstName": "William",
+			"Title": "ACME Inc.",
+			"Tel": "1-512-000-0000",
+			"EMail": "wsampler@company.com"
+		},
+		"CCP": {
+			"LastName": "Mustermann",
+			"FirstName": "Max",
+			"Department": "",
+			"PIN": "",
+			"LocationCity": "",
+			"LocationStreet": "",
+			"Room": "",
+			"Tel": "1-919-000-0000",
+			"EMail": "mmuster@cisco.com",
+			"Fax": ""
+		},
+		"CHD": {
+			"LastName": "Contact",
+			"FirstName": "Partner",
+			"PIN": "partnercontact",
+			"Sign": "B2B",
+			"Tel": "1-514-3456",
+			"EMail": "support@partner.com"
+		},
+		"MainComp": {
+			"Location": "123",
+			"Room": "",
+			"SerNrProv": "",
+			"InvNr": ""
+		},
+		"SubComp": {
+			"LocationName": "Suite 112/Gate 09",
+			"LocationCategory": "Data Center",
+			"LocationZip": "12345",
+			"LocationCity": "Capital City",
+			"LocationStreet": "12345 Main Street",
+			"LocationProvince": "VA",
+			"LocationTel": "3041",
+			"Room": "",
+			"OpSys": "562"
+		}
+	},
+	"Contracts": {
+		"ShortName": "Your Contract Here"
+	},
+	"ContractElements": {
+		"ShortName": "SRM"
+	},
+	"CallStates": {
+		"ShortName": "New"
+	},
+	"Priorities": {
+		"ShortName": "Shadow"
+	},
+	"Severities": {
+		"ShortName": "3"
+	},
+	"ExtTableValues": {
+		"Field1": "deliveries accepted between 9AM and 3PM only",
+		"Field2": "please ensure all seals are intact before opening",
+		"Field11": "Jane Doe, Reception",
+		"Field14": "2022-04-01 10:20:00",
+		"Field16": "Tech Management",
+		"Field17": "2nd Floor",
+		"Field18": "No",
+		"Field19": "Replace Part",
+		"Field20": "Router",
+		"Field21": "None",
+		"Field25": "United States",
+		"Field26": "1",
+		"Field31": "2022-04-01 10:20:00",
+		"Field104": "2022-04-01 10:20:00",
+		"Field105": "2022-04-01 10:20:00",
+		"Field106": "",
+		"Field107": "RMA123456",
+		"Field108": "VendINC123",
+		"Field109": "Vendor",
+		"Field110": "Yes",
+		"Field111": "Router Cat9K",
+		"Field112": "Power",
+		"Field113": "Simon",
+		"Field114": "Smith",
+		"Field115": "1-855-000-0000",
+		"Field116": "simon.smith@vendor.com"
+	}
+}

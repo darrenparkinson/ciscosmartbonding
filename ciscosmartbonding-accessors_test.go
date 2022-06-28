@@ -837,11 +837,25 @@ func TestCallData_GetCallCalculations(tt *testing.T) {
 	c.GetCallCalculations()
 }
 
+func TestCallData_GetCalls(tt *testing.T) {
+	c := &CallData{}
+	c.GetCalls()
+	c = nil
+	c.GetCalls()
+}
+
 func TestCallData_GetCallStates(tt *testing.T) {
 	c := &CallData{}
 	c.GetCallStates()
 	c = nil
 	c.GetCallStates()
+}
+
+func TestCallData_GetCallStatesSPR(tt *testing.T) {
+	c := &CallData{}
+	c.GetCallStatesSPR()
+	c = nil
+	c.GetCallStatesSPR()
 }
 
 func TestCallData_GetContractElements(tt *testing.T) {
@@ -3130,13 +3144,6 @@ func TestInboundCallsHolder_GetMainComp(tt *testing.T) {
 	i.GetMainComp()
 	i = nil
 	i.GetMainComp()
-}
-
-func TestInboundCallsHolder_GetNotes(tt *testing.T) {
-	i := &InboundCallsHolder{}
-	i.GetNotes()
-	i = nil
-	i.GetNotes()
 }
 
 func TestInboundCallsHolder_GetOwnership(tt *testing.T) {

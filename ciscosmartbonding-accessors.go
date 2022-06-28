@@ -861,12 +861,28 @@ func (c *CallData) GetCallCalculations() *CallCalculationsHolder {
 	return c.CallCalculations
 }
 
+// GetCalls returns the Calls field.
+func (c *CallData) GetCalls() *InboundCallsHolder {
+	if c == nil {
+		return nil
+	}
+	return c.Calls
+}
+
 // GetCallStates returns the CallStates field.
 func (c *CallData) GetCallStates() *CallSystemCodesHolder {
 	if c == nil {
 		return nil
 	}
 	return c.CallStates
+}
+
+// GetCallStatesSPR returns the CallStatesSPR field.
+func (c *CallData) GetCallStatesSPR() *CallSystemCodesHolder {
+	if c == nil {
+		return nil
+	}
+	return c.CallStatesSPR
 }
 
 // GetContractElements returns the ContractElements field.
@@ -2779,14 +2795,6 @@ func (i *InboundCallsHolder) GetMainComp() *ComponentsHolder {
 		return nil
 	}
 	return i.MainComp
-}
-
-// GetNotes returns the Notes field.
-func (i *InboundCallsHolder) GetNotes() *CallNotesHolder {
-	if i == nil {
-		return nil
-	}
-	return i.Notes
 }
 
 // GetOwnership returns the Ownership field if it's non-nil, zero value otherwise.

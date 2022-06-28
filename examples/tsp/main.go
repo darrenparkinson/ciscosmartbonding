@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 
@@ -21,6 +24,9 @@ func main() {
 		log.Fatal("missing password")
 	}
 
+	savejson := flag.Bool("save", false, "save to tsp-codes.json")
+	flag.Parse()
+
 	c := ciscosmartbonding.NewClient(u, p, nil)
 	// c.RestyClient.Debug = true
 
@@ -38,4 +44,16 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Println(len(res2))
+
+	if *savejson {
+		saveJSON("tsp-codes.json", res2)
+	}
+}
+
+func saveJSON(filename string, data interface{}) error {
+	file, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(filename, file, 0644)
 }

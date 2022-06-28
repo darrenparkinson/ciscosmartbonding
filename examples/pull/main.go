@@ -28,10 +28,14 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("%+v\n", res)
 		if resp.StatusCode() == http.StatusNoContent {
+			log.Println("no content")
 			break
 		}
+		// log.Printf("%+v\n", res)
+		log.Println("Service Grid Call ID:", res.GetCalls().GetSDCallID())
+		log.Println("    Customer Call ID:", res.GetCalls().GetCustCallID())
+		log.Println("             Remarks:", res.GetCalls().GetRemarks())
 	}
 
 }

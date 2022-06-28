@@ -1,0 +1,69 @@
+{
+	"Calls": {
+		"CustCallID": "PartnerTicket001",
+		"ShortDescription": "Title of Ticket",
+		"Description": "Test Ticket - long description of the issue",
+		"CustomerReasonCategory1": "Cisco Technology Code",
+		"CustomerReasonCategory2": "Cisco Sub-Technology Code",
+		"CustomerReasonCategory3": "Cisco Problem Code",
+		"Caller": {
+			"LastName": "Sampler",
+			"FirstName": "William",
+			"Title": "ACME Inc.",
+			"EMail": "wsampler@company.com"
+		},
+		"CHD": {
+			"LastName": "Contact",
+			"FirstName": "Partner",
+			"PIN": "ccoid",
+			"Sign": "B2B",
+			"Tel": "1-514-3456",
+			"EMail": "support@partner.com"
+		},
+		"MainComp": {
+			"Room": "",
+			"SerNrProv": "",
+			"InvNr": ""
+		},
+		"SubComp": {
+			"LocationName": "Suite 112/Gate 09",
+			"LocationCategory": "Data Center",
+			"LocationZip": "12345",
+			"LocationCity": "Capital City",
+			"LocationStreet": "12345 Main Street",
+			"LocationProvince": "VA"
+		}
+	},
+	"Contracts": {
+		"ShortName": "Your Contract Here"
+	},
+	"ContractElements": {
+		"ShortName": "SRM"
+	},
+	"CallStates": {
+		"ShortName": "New"
+	},
+	"Priorities": {
+		"ShortName": "Shadow"
+	},
+	"Severities": {
+		"ShortName": "3"
+	},
+	"ExtTableValues": {
+		"Field11": "Jane Doe, Reception",
+		"Field14": "2022-04-01 10:20:00",
+		"Field21": "None",
+		"Field25": "United States",
+		"Field26": "1",
+		"Field31": "2022-04-01 10:20:00",
+		"Field104": "2022-04-01 10:20:00",
+		"Field108": "VendINC123",
+		"Field109": "Vendor",
+		"Field111": "Router Cat9K",
+		"Field112": "Power",
+		"Field113": "Simon",
+		"Field114": "Smith",
+		"Field115": "1-855-000-0000",
+		"Field116": "simon.smith@vendor.com"
+	}
+}
