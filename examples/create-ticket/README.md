@@ -11,6 +11,10 @@ This example demonstrates creating a new ticket with the minimum mandatory field
 * `SMART_BONDING_CCOID` - partner CCO ID
 * `SMART_BONDING_TELEPHONE` - partner telephone number
 * `SMART_BONDING_EMAIL` - partner email address, e.g. support@partner.com
+* `SMART_BONDING_PRODUCTID` - valid entry relating to the product
+* `SMART_BONDING_SERIALNO` - valid entry relating to the product
+* `SMART_BONDING_CONTRACTID` - valid entry relating to the product
+* `SMART_BONDING_INSTALLSITEID` - valid entry relating to the product
 
 > Note: these can be provided in a `.env` file.
 
