@@ -11,8 +11,8 @@ import (
 
 func main() {
 	godotenv.Load()
-	var u, p, cv, cev, first, last, ccoid, tel, email string
-	mustLoadEnv(&u, &p, &cv, &cev, &first, &last, &ccoid, &tel, &email)
+	var u, p, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID string
+	mustLoadEnv(&u, &p, &cv, &cev, &first, &last, &ccoid, &tel, &email, &productID, &serialNo, &contractID, &siteID)
 
 	c := ciscosmartbonding.NewClient(u, p, nil)
 	c.RestyClient.Debug = true
@@ -20,11 +20,11 @@ func main() {
 	// You can use the PushUpdate function... (change these details as required)
 	res, err := c.PushUpdate(context.Background(), &ciscosmartbonding.CallData{
 		Calls: &ciscosmartbonding.InboundCallsHolder{
-			CustCallID:              ciscosmartbonding.String("PartnerTicket109`"),
+			CustCallID:              ciscosmartbonding.String("PartnerTicket119"),
 			ShortDescription:        ciscosmartbonding.String("Title of Ticket"),
 			Description:             ciscosmartbonding.String("Test Ticket - long description of the issue"),
-			CustomerReasonCategory1: ciscosmartbonding.String("LAN Switching"),
-			CustomerReasonCategory2: ciscosmartbonding.String("Cat9600"),
+			CustomerReasonCategory1: ciscosmartbonding.String("Voice - Communications Manager"),
+			CustomerReasonCategory2: ciscosmartbonding.String("Business Edition 6000 series / 7000 series with UCM"),
 			CustomerReasonCategory3: ciscosmartbonding.String("INSTLL_UNSTLL_UPGRD"),
 			Caller: &ciscosmartbonding.PersonsHolder{
 				LastName:  ciscosmartbonding.String("Sampler"),
@@ -41,10 +41,10 @@ func main() {
 				EMail:     ciscosmartbonding.String(email),
 			},
 			MainComp: &ciscosmartbonding.ComponentsHolder{
-				Room:      ciscosmartbonding.String(""),
-				SerNrProv: ciscosmartbonding.String(""),
-				InvNr:     ciscosmartbonding.String(""),
-				Location:  ciscosmartbonding.String("123"),
+				Room:      ciscosmartbonding.String(productID),
+				SerNrProv: ciscosmartbonding.String(serialNo),
+				InvNr:     ciscosmartbonding.String(contractID),
+				Location:  ciscosmartbonding.String(siteID),
 			},
 			SubComp: &ciscosmartbonding.ComponentsHolder{
 				LocationName:     ciscosmartbonding.String("Suite 112/Gate 09"),
@@ -94,7 +94,7 @@ func main() {
 	log.Println(res.StatusCode())
 }
 
-func mustLoadEnv(u, p, cv, cev, first, last, ccoid, tel, email *string) {
+func mustLoadEnv(u, p, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID *string) {
 	var ok bool
 	if *u, ok = os.LookupEnv("SMART_BONDING_USERNAME"); !ok {
 		log.Fatal("missing SMART_BONDING_USERNAME variable")
@@ -123,4 +123,18 @@ func mustLoadEnv(u, p, cv, cev, first, last, ccoid, tel, email *string) {
 	if *email, ok = os.LookupEnv("SMART_BONDING_EMAIL"); !ok {
 		log.Fatal("missing SMART_BONDING_EMAIL variable")
 	}
+
+	if *productID, ok = os.LookupEnv("SMART_BONDING_PRODUCTID"); !ok {
+		log.Fatal("missing SMART_BONDING_PRODUCTID variable")
+	}
+	if *serialNo, ok = os.LookupEnv("SMART_BONDING_SERIALNO"); !ok {
+		log.Fatal("missing SMART_BONDING_SERIALNO variable")
+	}
+	if *contractID, ok = os.LookupEnv("SMART_BONDING_CONTRACTID"); !ok {
+		log.Fatal("missing SMART_BONDING_CONTRACTID variable")
+	}
+	if *siteID, ok = os.LookupEnv("SMART_BONDING_INSTALLSITEID"); !ok {
+		log.Fatal("missing SMART_BONDING_INSTALLSITEID variable")
+	}
+
 }

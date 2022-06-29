@@ -28,7 +28,10 @@ func TestAttachmentsHolder_GetFileName(tt *testing.T) {
 }
 
 func TestAttachmentsHolder_GetNR(tt *testing.T) {
-	a := &AttachmentsHolder{}
+	var zeroValue float32
+	a := &AttachmentsHolder{NR: &zeroValue}
+	a.GetNR()
+	a = &AttachmentsHolder{}
 	a.GetNR()
 	a = nil
 	a.GetNR()
@@ -784,7 +787,10 @@ func TestCallCalculationsHolder_GetRequestedWorkEndTime(tt *testing.T) {
 }
 
 func TestCallCalculationsHolder_GetRevenue(tt *testing.T) {
-	c := &CallCalculationsHolder{}
+	var zeroValue float32
+	c := &CallCalculationsHolder{Revenue: &zeroValue}
+	c.GetRevenue()
+	c = &CallCalculationsHolder{}
 	c.GetRevenue()
 	c = nil
 	c.GetRevenue()
@@ -2428,7 +2434,10 @@ func TestComponentsHolder_GetLocationDescription(tt *testing.T) {
 }
 
 func TestComponentsHolder_GetLocationLevel(tt *testing.T) {
-	c := &ComponentsHolder{}
+	var zeroValue float32
+	c := &ComponentsHolder{LocationLevel: &zeroValue}
+	c.GetLocationLevel()
+	c = &ComponentsHolder{}
 	c.GetLocationLevel()
 	c = nil
 	c.GetLocationLevel()
@@ -3157,7 +3166,10 @@ func TestInboundCallsHolder_GetOwnership(tt *testing.T) {
 }
 
 func TestInboundCallsHolder_GetPartnerCoreTicketId(tt *testing.T) {
-	i := &InboundCallsHolder{}
+	var zeroValue float32
+	i := &InboundCallsHolder{PartnerCoreTicketId: &zeroValue}
+	i.GetPartnerCoreTicketId()
+	i = &InboundCallsHolder{}
 	i.GetPartnerCoreTicketId()
 	i = nil
 	i.GetPartnerCoreTicketId()
@@ -3295,7 +3307,10 @@ func TestInboundCallsHolder_GetRemarks(tt *testing.T) {
 }
 
 func TestInboundCallsHolder_GetSDCallID(tt *testing.T) {
-	i := &InboundCallsHolder{}
+	var zeroValue float32
+	i := &InboundCallsHolder{SDCallID: &zeroValue}
+	i.GetSDCallID()
+	i = &InboundCallsHolder{}
 	i.GetSDCallID()
 	i = nil
 	i.GetSDCallID()
@@ -3806,7 +3821,10 @@ func TestParentCallsHolder_GetCustCallID(tt *testing.T) {
 }
 
 func TestParentCallsHolder_GetSDCallID(tt *testing.T) {
-	p := &ParentCallsHolder{}
+	var zeroValue float32
+	p := &ParentCallsHolder{SDCallID: &zeroValue}
+	p.GetSDCallID()
+	p = &ParentCallsHolder{}
 	p.GetSDCallID()
 	p = nil
 	p.GetSDCallID()

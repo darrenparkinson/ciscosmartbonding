@@ -21,12 +21,12 @@ func (a *AttachmentsHolder) GetFileName() string {
 	return *a.FileName
 }
 
-// GetNR returns the NR field.
-func (a *AttachmentsHolder) GetNR() *float32 {
-	if a == nil {
-		return nil
+// GetNR returns the NR field if it's non-nil, zero value otherwise.
+func (a *AttachmentsHolder) GetNR() float32 {
+	if a == nil || a.NR == nil {
+		return 0
 	}
-	return a.NR
+	return *a.NR
 }
 
 // GetActivityType returns the ActivityType field.
@@ -813,12 +813,12 @@ func (c *CallCalculationsHolder) GetRequestedWorkEndTime() *CiscoDateTime {
 	return c.RequestedWorkEndTime
 }
 
-// GetRevenue returns the Revenue field.
-func (c *CallCalculationsHolder) GetRevenue() *float32 {
-	if c == nil {
-		return nil
+// GetRevenue returns the Revenue field if it's non-nil, zero value otherwise.
+func (c *CallCalculationsHolder) GetRevenue() float32 {
+	if c == nil || c.Revenue == nil {
+		return 0
 	}
-	return c.Revenue
+	return *c.Revenue
 }
 
 // GetServiceType returns the ServiceType field if it's non-nil, zero value otherwise.
@@ -2181,12 +2181,12 @@ func (c *ComponentsHolder) GetLocationDescription() string {
 	return *c.LocationDescription
 }
 
-// GetLocationLevel returns the LocationLevel field.
-func (c *ComponentsHolder) GetLocationLevel() *float32 {
-	if c == nil {
-		return nil
+// GetLocationLevel returns the LocationLevel field if it's non-nil, zero value otherwise.
+func (c *ComponentsHolder) GetLocationLevel() float32 {
+	if c == nil || c.LocationLevel == nil {
+		return 0
 	}
-	return c.LocationLevel
+	return *c.LocationLevel
 }
 
 // GetLocationName returns the LocationName field if it's non-nil, zero value otherwise.
@@ -2805,12 +2805,12 @@ func (i *InboundCallsHolder) GetOwnership() string {
 	return *i.Ownership
 }
 
-// GetPartnerCoreTicketId returns the PartnerCoreTicketId field.
-func (i *InboundCallsHolder) GetPartnerCoreTicketId() *float32 {
-	if i == nil {
-		return nil
+// GetPartnerCoreTicketId returns the PartnerCoreTicketId field if it's non-nil, zero value otherwise.
+func (i *InboundCallsHolder) GetPartnerCoreTicketId() float32 {
+	if i == nil || i.PartnerCoreTicketId == nil {
+		return 0
 	}
-	return i.PartnerCoreTicketId
+	return *i.PartnerCoreTicketId
 }
 
 // GetProblemStartTime returns the ProblemStartTime field.
@@ -2925,12 +2925,12 @@ func (i *InboundCallsHolder) GetRemarks() string {
 	return *i.Remarks
 }
 
-// GetSDCallID returns the SDCallID field.
-func (i *InboundCallsHolder) GetSDCallID() *float32 {
-	if i == nil {
-		return nil
+// GetSDCallID returns the SDCallID field if it's non-nil, zero value otherwise.
+func (i *InboundCallsHolder) GetSDCallID() float32 {
+	if i == nil || i.SDCallID == nil {
+		return 0
 	}
-	return i.SDCallID
+	return *i.SDCallID
 }
 
 // GetShortDescription returns the ShortDescription field if it's non-nil, zero value otherwise.
@@ -3341,12 +3341,12 @@ func (p *ParentCallsHolder) GetCustCallID() string {
 	return *p.CustCallID
 }
 
-// GetSDCallID returns the SDCallID field.
-func (p *ParentCallsHolder) GetSDCallID() *float32 {
-	if p == nil {
-		return nil
+// GetSDCallID returns the SDCallID field if it's non-nil, zero value otherwise.
+func (p *ParentCallsHolder) GetSDCallID() float32 {
+	if p == nil || p.SDCallID == nil {
+		return 0
 	}
-	return p.SDCallID
+	return *p.SDCallID
 }
 
 // GetSPCallID returns the SPCallID field if it's non-nil, zero value otherwise.

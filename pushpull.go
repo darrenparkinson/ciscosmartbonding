@@ -408,8 +408,8 @@ type InboundCallsHolder struct {
 	CustomerReasonCategory5    *string            `json:"CustomerReasonCategory5,omitempty"`
 	CustomerRequestedEndTime   *CiscoDateTime     `json:"CustomerRequestedEndTime,omitempty"`
 	CustomerRequestedStartTime *CiscoDateTime     `json:"CustomerRequestedStartTime,omitempty"`
-	Description                *string            `json:"Description,omitempty"` // Description of Ticket e.g "No internet connection on Location XXX, Router shows no green lights, Error Message YYY on interface". M for Create.
-	Diagnosis                  *string            `json:"Diagnosis,omitempty"`
+	Description                *string            `json:"Description,omitempty"` // Description of Ticket e.g "No internet connection on Location XXX, Router shows no green lights, Error Message YYY on interface". M for Create. M for Close.
+	Diagnosis                  *string            `json:"Diagnosis,omitempty"`   // Customer Symptom. M for Close.
 	MainComp                   *ComponentsHolder  `json:"MainComp,omitempty"`
 	Notes                      []*CallNotesHolder `json:"Notes,omitempty"`
 	Ownership                  *string            `json:"Ownership,omitempty"`
@@ -504,21 +504,21 @@ type ParentCallsHolder struct {
 // PersonsHolder defines model for PersonsHolder.
 type PersonsHolder struct {
 	Category         *string `json:"Category,omitempty"`
-	Department       *string `json:"Department,omitempty"`
+	Department       *string `json:"Department,omitempty"` // For CCP, Software Product ID. M on Close.
 	Description      *string `json:"Description,omitempty"`
-	EMail            *string `json:"EMail,omitempty"`
-	Fax              *string `json:"Fax,omitempty"`
+	EMail            *string `json:"EMail,omitempty"` // For CCP, Underlying Cause. M on Close.
+	Fax              *string `json:"Fax,omitempty"`   // For CCP, Resolution Code. M on Close.
 	FirstName        *string `json:"FirstName,omitempty"`
 	Language         *string `json:"Language,omitempty"`
 	LastName         *string `json:"LastName,omitempty"`
 	Location         *string `json:"Location,omitempty"`
-	LocationCity     *string `json:"LocationCity,omitempty"`
+	LocationCity     *string `json:"LocationCity,omitempty"` // For CCP, Complexity. M on Close.
 	LocationCountry  *string `json:"LocationCountry,omitempty"`
 	LocationProvince *string `json:"LocationProvince,omitempty"`
-	LocationStreet   *string `json:"LocationStreet,omitempty"`
+	LocationStreet   *string `json:"LocationStreet,omitempty"` // For CCP, Resolution Summary. M on Close.
 	LocationZip      *string `json:"LocationZip,omitempty"`
 	MobileTel        *string `json:"MobileTel,omitempty"`
-	PIN              *string `json:"PIN,omitempty"`  // For CHD, CCO ID for the case used for entitlement. M for Create.
+	PIN              *string `json:"PIN,omitempty"`  // For CHD, CCO ID for the case used for entitlement. M for Create. For CCP, Hardware Product ID. M for Close.
 	Room             *string `json:"Room,omitempty"` // For CCP, Subscription ID (if needed to pass entitlement).
 	Salutation       *string `json:"Salutation,omitempty"`
 	ShortName        *string `json:"ShortName,omitempty"`
