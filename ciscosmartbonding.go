@@ -179,7 +179,7 @@ func (c *Client) getToken() error {
 	}
 	t, err := c.generateAuthToken()
 	if err != nil {
-		log.Println("error retrieving token")
+		log.Printf("error retrieving token: %s", err)
 		return err
 	}
 	c.token = t

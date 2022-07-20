@@ -20,7 +20,7 @@ func main() {
 	// You can use the PushUpdate function... (change these details as required)
 	res, err := c.PushUpdate(context.Background(), &ciscosmartbonding.CallData{
 		Calls: &ciscosmartbonding.InboundCallsHolder{
-			CustCallID:              ciscosmartbonding.String("PartnerTicket119"),
+			CustCallID:              ciscosmartbonding.String("PartnerTicket121"),
 			ShortDescription:        ciscosmartbonding.String("Title of Ticket"),
 			Description:             ciscosmartbonding.String("Test Ticket - long description of the issue"),
 			CustomerReasonCategory1: ciscosmartbonding.String("Voice - Communications Manager"),
