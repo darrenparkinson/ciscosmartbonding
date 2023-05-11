@@ -17,7 +17,7 @@ func TestPushUpdate(t *testing.T) {
 	// set up the handler
 	// we're only testing that the function makes a POST request to Cisco.  Since they don't
 	// actually send us any response, there isn't much for us to test here.
-	mux.HandleFunc("/ws/rest/v1/push/call", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/rest/v1/push/call", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
 	})
 	ctx := context.Background()
@@ -39,7 +39,7 @@ func TestUpdateTicketWithWorkNotes(t *testing.T) {
 	inputRemark := "Test Remark"
 
 	// set up the handler
-	mux.HandleFunc("/ws/rest/v1/push/call", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/rest/v1/push/call", func(w http.ResponseWriter, r *http.Request) {
 		// decode the incoming body
 		var got CallData
 		json.NewDecoder(r.Body).Decode(&got)
@@ -48,7 +48,8 @@ func TestUpdateTicketWithWorkNotes(t *testing.T) {
 		want := CallData{
 			Calls: &InboundCallsHolder{
 				CustCallID: String(inputTicket),
-				Remarks:    String(inputRemark),
+				// Remarks:    String(inputRemark),
+				Remarks: &StringOrSliceOfErrors{RemarkString: inputRemark},
 			},
 			CallStates: &CallSystemCodesHolder{
 				ShortName: String("Update"),

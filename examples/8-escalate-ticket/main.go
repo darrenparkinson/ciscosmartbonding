@@ -11,17 +11,20 @@ import (
 
 func main() {
 	godotenv.Load()
-	var u, p string
-	mustLoadEnv(&u, &p)
+	var clientID, secret string
+	mustLoadEnv(&clientID, &secret)
 
-	c := ciscosmartbonding.NewClient(u, p, nil)
+	c := ciscosmartbonding.NewClient(clientID, secret, nil)
 	c.RestyClient.Debug = true
 
 	// You can use the PushUpdate function... (change these details as required)
 	res, err := c.PushUpdate(context.Background(), &ciscosmartbonding.CallData{
 		Calls: &ciscosmartbonding.InboundCallsHolder{
-			CustCallID: ciscosmartbonding.String("PartnerTicket121"),
-			Remarks:    ciscosmartbonding.String("Ticket Update - Escalation"),
+			CustCallID: ciscosmartbonding.String("PartnerTicket16"),
+			// Remarks:    ciscosmartbonding.String("Ticket Update - Escalation"),
+			Remarks: &ciscosmartbonding.StringOrSliceOfErrors{
+				RemarkString: "Ticket Update - Escalation",
+			},
 		},
 		CallStates: &ciscosmartbonding.CallSystemCodesHolder{
 			ShortName: ciscosmartbonding.String("Update"),
@@ -36,12 +39,12 @@ func main() {
 	log.Println(res.StatusCode())
 }
 
-func mustLoadEnv(u, p *string) {
+func mustLoadEnv(clientID, secret *string) {
 	var ok bool
-	if *u, ok = os.LookupEnv("SMART_BONDING_USERNAME"); !ok {
-		log.Fatal("missing SMART_BONDING_USERNAME variable")
+	if *clientID, ok = os.LookupEnv("SMART_BONDING_CLIENTID"); !ok {
+		log.Fatal("missing SMART_BONDING_CLIENTID variable")
 	}
-	if *p, ok = os.LookupEnv("SMART_BONDING_PASSWORD"); !ok {
-		log.Fatal("missing SMART_BONDING_PASSWORD variable")
+	if *secret, ok = os.LookupEnv("SMART_BONDING_SECRET"); !ok {
+		log.Fatal("missing SMART_BONDING_SECRET variable")
 	}
 }

@@ -322,7 +322,7 @@ func (b byName) Len() int           { return len(b) }
 func (b byName) Less(i, j int) bool { return b[i].sortVal < b[j].sortVal }
 func (b byName) Swap(i, j int)      { b[i], b[j] = b[j], b[i] }
 
-const source = `// Copyright {{.Year}} The ciscobcs AUTHORS. All rights reserved.
+const source = `// Copyright {{.Year}} The ciscosmartbonding AUTHORS. All rights reserved.
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.

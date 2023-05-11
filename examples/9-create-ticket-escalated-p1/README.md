@@ -1,9 +1,9 @@
-# Create Ticket - Escalated (P1)
+# Create Ticket
 
-This example demonstrates creating a new, immediately escalated, ticket with a P1 priority and the minimum mandatory fields.  You will need the following environment variables:
+This example demonstrates creating a new ticket with the minimum mandatory fields.  You will need the following environment variables:
 
-* `SMART_BONDING_USERNAME` - the user name given to access the service
-* `SMART_BONDING_PASSWORD` - the associated password for the username
+* `SMART_BONDING_CLIENTID` - the client id given to access the service
+* `SMART_BONDING_SECRET` - the associated secret for the client id
 * `SMART_BONDING_CONTRACT_VALUE` - contract value provided by Cisco
 * `SMART_BONDING_CONTRACT_ELEMENT_VALUE` element value provided by Cisco
 * `SMART_BONDING_FIRSTNAME` - partner account first name, e.g. technical

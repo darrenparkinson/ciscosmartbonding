@@ -1,5 +1,56 @@
 package ciscosmartbonding
 
+import (
+	"encoding/json"
+)
+
+// CiscoRemarksError is an error type that is sometimes returned in the Remarks field!! IKR!
+type CiscoRemarksError struct {
+	ErrorMessage string `json:"errorMessage"`
+	ErrorCode    string `json:"errorCode"`
+}
+
+// StringOrSliceOfErrors caters for Cisco returning either a string or a slice of errors in the Remarks field
+// Yep, I'm serious!
+// We provide a custom MarshalJSON to only send the string back to Cisco and a custom UnmarshalJSON to get the
+// errors or a string
+type StringOrSliceOfErrors struct {
+	Errors       []CiscoRemarksError
+	RemarkString string // used to hold the remarks if we have a single string instead of errors
+}
+
+// MarshalJSON lets us send just the string
+func (se *StringOrSliceOfErrors) MarshalJSON() ([]byte, error) {
+	if se == nil {
+		return []byte(""), nil
+	}
+	return json.Marshal(se.RemarkString)
+}
+
+// UnmarshalJSON convert JSON object array of errors or string to object
+func (se *StringOrSliceOfErrors) UnmarshalJSON(data []byte) error {
+	var jsonObj interface{}
+	err := json.Unmarshal(data, &jsonObj)
+	if err != nil {
+		return err
+	}
+	switch obj := jsonObj.(type) {
+	case string:
+		*se = StringOrSliceOfErrors{RemarkString: obj}
+		return nil
+	case []interface{}:
+		var errSlice []CiscoRemarksError
+		err := json.Unmarshal(data, &errSlice)
+		if err != nil {
+			return err
+		}
+		*se = StringOrSliceOfErrors{Errors: errSlice}
+		return nil
+	}
+	// fmt.Println("GOT TO END")
+	return ErrUnsupportedType
+}
+
 // AttachmentsHolder defines model for AttachmentsHolder.
 type AttachmentsHolder struct {
 	DataBase64 *string  `json:"DataBase64,omitempty"`
@@ -146,6 +197,11 @@ type CallData struct {
 	RequestTypes     *CallSystemCodesHolder         `json:"RequestTypes,omitempty"`
 	Severities       *CallSystemCodesHolder         `json:"Severities,omitempty"` // Severity of the ticket/case e.g. "MED" (from list). M for Create.
 	Urgency          *CallSystemCodesHolder         `json:"Urgency,omitempty"`
+
+	// They may also send us an "error" if there is no data to fetch, also with a 200 status.
+	// So we'll add the fields here so we can check against them
+	Message string `json:"message,omitempty"`
+	Status  string `json:"status,omitempty"`
 }
 
 // CallExtensionsHolder defines model for CallExtensionsHolder.
@@ -427,22 +483,23 @@ type InboundCallsHolder struct {
 	ProviderReasonCategory5    *string            `json:"ProviderReasonCategory5,omitempty"`
 	ProviderScheduledEndTime   *CiscoDateTime     `json:"ProviderScheduledEndTime,omitempty"`
 	ProviderScheduledStartTime *CiscoDateTime     `json:"ProviderScheduledStartTime,omitempty"`
-	Remarks                    *string            `json:"Remarks,omitempty"`          // Comments sent during ticket updates (e.g. work log)
-	SDCallID                   *float32           `json:"SDCallID,omitempty"`         // ServiceGrid ticket ID e.g. 1340036031
-	SPCallID                   *string            `json:"SPCallID,omitempty"`         // Cisco TAC CSOne ticket ID e.g. 692072147
-	ShortDescription           *string            `json:"ShortDescription,omitempty"` // Subject of Ticket when Created e.g. "Network issue in Location XXX". M for Create.
-	Solution                   *string            `json:"Solution,omitempty"`         // The resolution notes sent over when ticket is RESOLVED. M on Update Resolved.
-	SubComp                    *ComponentsHolder  `json:"SubComp,omitempty"`
-	SysSpecField1              *string            `json:"SysSpecField1,omitempty"`
-	SysSpecField10             *string            `json:"SysSpecField10,omitempty"`
-	SysSpecField2              *string            `json:"SysSpecField2,omitempty"`
-	SysSpecField3              *string            `json:"SysSpecField3,omitempty"`
-	SysSpecField4              *string            `json:"SysSpecField4,omitempty"`
-	SysSpecField5              *string            `json:"SysSpecField5,omitempty"`
-	SysSpecField6              *string            `json:"SysSpecField6,omitempty"`
-	SysSpecField7              *string            `json:"SysSpecField7,omitempty"`
-	SysSpecField8              *string            `json:"SysSpecField8,omitempty"`
-	SysSpecField9              *string            `json:"SysSpecField9,omitempty"`
+	// Remarks                    *string            `json:"Remarks,omitempty"`          // Comments sent during ticket updates (e.g. work log) TODO: May be an array of strings too!!! So perhaps need to check for this.
+	Remarks          *StringOrSliceOfErrors `json:"Remarks,omitempty"`          // Comments sent during ticket updates (e.g. work log) TODO: May be an array of strings too!!! So perhaps need to check for this.
+	SDCallID         *string                `json:"SDCallID,omitempty"`         // ServiceGrid ticket ID e.g. 1340036031
+	SPCallID         *string                `json:"SPCallID,omitempty"`         // Cisco TAC CSOne ticket ID e.g. 692072147
+	ShortDescription *string                `json:"ShortDescription,omitempty"` // Subject of Ticket when Created e.g. "Network issue in Location XXX". M for Create.
+	Solution         *string                `json:"Solution,omitempty"`         // The resolution notes sent over when ticket is RESOLVED. M on Update Resolved.
+	SubComp          *ComponentsHolder      `json:"SubComp,omitempty"`
+	SysSpecField1    *string                `json:"SysSpecField1,omitempty"`
+	SysSpecField10   *string                `json:"SysSpecField10,omitempty"`
+	SysSpecField2    *string                `json:"SysSpecField2,omitempty"`
+	SysSpecField3    *string                `json:"SysSpecField3,omitempty"`
+	SysSpecField4    *string                `json:"SysSpecField4,omitempty"`
+	SysSpecField5    *string                `json:"SysSpecField5,omitempty"`
+	SysSpecField6    *string                `json:"SysSpecField6,omitempty"`
+	SysSpecField7    *string                `json:"SysSpecField7,omitempty"`
+	SysSpecField8    *string                `json:"SysSpecField8,omitempty"`
+	SysSpecField9    *string                `json:"SysSpecField9,omitempty"`
 }
 
 // InboundContractElementsHolder defines model for InboundContractElementsHolder.

@@ -29,7 +29,7 @@ func TestPullUpdate(t *testing.T) {
 		t.Fatalf("error decoding test data file %s: %v", filename, err)
 	}
 	// set up our handler
-	mux.HandleFunc("/ws/rest/v1/pull/call", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/rest/v1/pull/call", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(w, string(data))

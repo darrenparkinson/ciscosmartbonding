@@ -13,11 +13,11 @@ func main() {
 	godotenv.Load()
 	var u, p string
 	var ok bool
-	if u, ok = os.LookupEnv("SMART_BONDING_USERNAME"); !ok {
-		log.Fatal("missing username")
+	if u, ok = os.LookupEnv("SMART_BONDING_CLIENTID"); !ok {
+		log.Fatal("missing client id")
 	}
-	if p, ok = os.LookupEnv("SMART_BONDING_PASSWORD"); !ok {
-		log.Fatal("missing password")
+	if p, ok = os.LookupEnv("SMART_BONDING_SECRET"); !ok {
+		log.Fatal("missing secret")
 	}
 
 	c := ciscosmartbonding.NewClient(u, p, nil)
@@ -26,11 +26,11 @@ func main() {
 	// You can use the PushUpdate function...
 	// res, err := c.PushUpdate(context.Background(), &ciscosmartbonding.CallData{
 	// 	Calls: &ciscosmartbonding.InboundCallsHolder{
-	// 		CustCallID: ciscosmartbonding.String("PartnerTicket001"),
-	// 		Remarks:    ciscosmartbonding.String("some ticket updates. All notes / text updates go in here"),
+	// 		CustCallID: ciscosmartbonding.String(ticketID),
+	// 		Remarks: &ciscosmartbonding.StringOrSliceOfErrors{RemarkString: remarks},
 	// 	},
 	// 	CallStates: &ciscosmartbonding.CallSystemCodesHolder{
-	// 		ShortName: ciscosmartbonding.String("Update"),
+	// 		ShortName: ciscosmartbonding.String("Resolved"),
 	// 	},
 	// })
 	// if err != nil {
@@ -39,7 +39,7 @@ func main() {
 	// log.Println(res.StatusCode())
 
 	// Or use the helper function:
-	res, err := c.UpdateTicketWithWorkNotes(context.Background(), "PartnerTicket001", "some ticket updates. All notes / text updates go in here")
+	res, err := c.ResolveTicketWithWorkNotes(context.Background(), "PartnerTicket14", "some ticket updates. All notes / text updates go in here - update resolve")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -11,26 +11,27 @@ import (
 
 func main() {
 	godotenv.Load()
-	var u, p, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID string
-	mustLoadEnv(&u, &p, &cv, &cev, &first, &last, &ccoid, &tel, &email, &productID, &serialNo, &contractID, &siteID)
+	var clientID, secret, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID string
+	mustLoadEnv(&clientID, &secret, &cv, &cev, &first, &last, &ccoid, &tel, &email, &productID, &serialNo, &contractID, &siteID)
 
-	c := ciscosmartbonding.NewClient(u, p, nil)
+	c := ciscosmartbonding.NewClient(clientID, secret, nil)
 	c.RestyClient.Debug = true
 
 	// You can use the PushUpdate function... (change these details as required)
 	res, err := c.PushUpdate(context.Background(), &ciscosmartbonding.CallData{
 		Calls: &ciscosmartbonding.InboundCallsHolder{
-			CustCallID:              ciscosmartbonding.String("PartnerTicket121"),
+			CustCallID:              ciscosmartbonding.String("PartnerTicket16"),
 			ShortDescription:        ciscosmartbonding.String("Title of Ticket"),
 			Description:             ciscosmartbonding.String("Test Ticket - long description of the issue"),
 			CustomerReasonCategory1: ciscosmartbonding.String("Voice - Communications Manager"),
 			CustomerReasonCategory2: ciscosmartbonding.String("Business Edition 6000 series / 7000 series with UCM"),
-			CustomerReasonCategory3: ciscosmartbonding.String("INSTLL_UNSTLL_UPGRD"),
+			// CustomerReasonCategory3: ciscosmartbonding.String("INSTLL_UNSTLL_UPGRD"),
+			CustomerReasonCategory3: ciscosmartbonding.String("Install, uninstall, or Upgrade"),
 			Caller: &ciscosmartbonding.PersonsHolder{
 				LastName:  ciscosmartbonding.String("Sampler"),
 				FirstName: ciscosmartbonding.String("William"),
-				Title:     ciscosmartbonding.String("ACME Inc."),
-				EMail:     ciscosmartbonding.String("wsampler@company.com"),
+				// Title:     ciscosmartbonding.String("ACME Inc."),
+				EMail: ciscosmartbonding.String("wsampler@company.com"),
 			},
 			CHD: &ciscosmartbonding.PersonsHolder{
 				LastName:  ciscosmartbonding.String(last),
@@ -46,14 +47,14 @@ func main() {
 				InvNr:     ciscosmartbonding.String(contractID),
 				Location:  ciscosmartbonding.String(siteID),
 			},
-			SubComp: &ciscosmartbonding.ComponentsHolder{
-				LocationName:     ciscosmartbonding.String("Suite 112/Gate 09"),
-				LocationCategory: ciscosmartbonding.String("Data Center"),
-				LocationZip:      ciscosmartbonding.String("12345"),
-				LocationCity:     ciscosmartbonding.String("Capital City"),
-				LocationStreet:   ciscosmartbonding.String("12345 Main Street"),
-				LocationProvince: ciscosmartbonding.String(""),
-			},
+			// SubComp: &ciscosmartbonding.ComponentsHolder{
+			// 	LocationName:     ciscosmartbonding.String("Suite 112/Gate 09"),
+			// 	LocationCategory: ciscosmartbonding.String("Data Center"),
+			// 	LocationZip:      ciscosmartbonding.String("12345"),
+			// 	LocationCity:     ciscosmartbonding.String("Capital City"),
+			// 	LocationStreet:   ciscosmartbonding.String("12345 Main Street"),
+			// 	LocationProvince: ciscosmartbonding.String(""),
+			// },
 		},
 		CallStates: &ciscosmartbonding.CallSystemCodesHolder{
 			ShortName: ciscosmartbonding.String("New"),
@@ -71,21 +72,26 @@ func main() {
 			ShortName: ciscosmartbonding.String("3"),
 		},
 		ExtTableValues: &ciscosmartbonding.CallExtensionsHolder{
-			Field11:  ciscosmartbonding.String("Jane Doe, Reception"),
-			Field14:  ciscosmartbonding.String("2022-04-01 10:20:00"),
-			Field21:  ciscosmartbonding.String("None"),
-			Field25:  ciscosmartbonding.String("United States"),
-			Field26:  ciscosmartbonding.String("1"),
-			Field31:  ciscosmartbonding.String("2022-04-01 10:20:00"),
-			Field104: ciscosmartbonding.String("2022-04-01 10:20:00"),
-			Field108: ciscosmartbonding.String("VendINC123"),
-			Field109: ciscosmartbonding.String("Vendor"),
-			Field111: ciscosmartbonding.String("Router Cat9K"),
-			Field112: ciscosmartbonding.String("Power"),
-			Field113: ciscosmartbonding.String("Simon"),
-			Field114: ciscosmartbonding.String("Smith"),
-			Field115: ciscosmartbonding.String("1-855-000-0000"),
-			Field116: ciscosmartbonding.String("simon.smith@vendor.com"),
+			// ** RMA / IRE Fields Not Required **
+			// Field11:  ciscosmartbonding.String("Jane Doe, Reception"),
+			// Field14:  ciscosmartbonding.String("2022-04-01 10:20:00"),
+			// Field21:  ciscosmartbonding.String("None"),
+			// Field25:  ciscosmartbonding.String("United States"),
+			// Field26:  ciscosmartbonding.String("1"),
+			// Field31:  ciscosmartbonding.String("2022-04-01 10:20:00"),
+
+			// ** Partner Fields **
+			Field104: ciscosmartbonding.String("2023-05-03 11:16:00"), // partner ticket open date/time
+
+			// ** 3rd Party Fields Not Required **
+			// Field108: ciscosmartbonding.String("VendINC123"),
+			// Field109: ciscosmartbonding.String("Vendor"),
+			// Field111: ciscosmartbonding.String("Router Cat9K"),
+			// Field112: ciscosmartbonding.String("Power"),
+			// Field113: ciscosmartbonding.String("Simon"),
+			// Field114: ciscosmartbonding.String("Smith"),
+			// Field115: ciscosmartbonding.String("1-855-000-0000"),
+			// Field116: ciscosmartbonding.String("simon.smith@vendor.com"),
 		},
 	})
 	if err != nil {
@@ -94,13 +100,13 @@ func main() {
 	log.Println(res.StatusCode())
 }
 
-func mustLoadEnv(u, p, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID *string) {
+func mustLoadEnv(clientID, secret, cv, cev, first, last, ccoid, tel, email, productID, serialNo, contractID, siteID *string) {
 	var ok bool
-	if *u, ok = os.LookupEnv("SMART_BONDING_USERNAME"); !ok {
-		log.Fatal("missing SMART_BONDING_USERNAME variable")
+	if *clientID, ok = os.LookupEnv("SMART_BONDING_CLIENTID"); !ok {
+		log.Fatal("missing SMART_BONDING_CLIENTID variable")
 	}
-	if *p, ok = os.LookupEnv("SMART_BONDING_PASSWORD"); !ok {
-		log.Fatal("missing SMART_BONDING_PASSWORD variable")
+	if *secret, ok = os.LookupEnv("SMART_BONDING_SECRET"); !ok {
+		log.Fatal("missing SMART_BONDING_SECRET variable")
 	}
 	if *cv, ok = os.LookupEnv("SMART_BONDING_CONTRACT_VALUE"); !ok {
 		log.Fatal("missing SMART_BONDING_CONTRACT_VALUE variable")

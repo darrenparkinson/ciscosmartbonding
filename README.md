@@ -17,24 +17,12 @@ import "github.com/darrenparkinson/ciscosmartbonding"
 **Initialise a client:**
 
 ```go
-c := ciscosmartbonding.NewClient(username, password, nil)
+c := ciscosmartbonding.NewClient(clientID, secret, nil)
 ```
 
 You can optionally provide your own Resty v2 client.
 
 **Retrieve TSP Codes with the client**
-
-```go
-res, err := c.GetTSPCodes(context.Background())
-```
-
-**Use Pagination**
-
-```go
-res, err := c.GetTSPCodes(context.Background(), &ciscosmartbonding.ListParams{Limit: ciscosmartbonding.Int64(5000)})
-```
-
-**Or use the convenience functions**
 
 ```go
 res, err := c.GetAllTSPCodes(context.Background())
@@ -53,25 +41,24 @@ and display summary information.
 This should be opened in a separate window whilst you run the other samples:
 
 ```sh
-$ go run ./examples/retriever -env development
+$ go run ./examples/0-retriever-service -env development
 ```
 
-Refer to the [README](examples/retriever/README.md) for more information.
+Refer to the [README](examples/0-retriever-service/README.md) for more information.
 
 ### Create Ticket
 
 This can be used to create a new shadow ticket.  You will need a lot more variables for this example.  
-Refer to the [README](examples/retriever/README.md) for more information.
+Refer to the [README](examples/2-create-ticket/README.md) for more information.
 
 ```sh
-$ go run ./examples/create-ticket
+$ go run ./examples/2-create-ticket
 ```
 
-There are variations on this to create an escalated ticket and an escalated P1 ticket:
+There is a variation on this to create an an escalated P1 ticket:
 
 ```sh
-$ go run ./examples/create-ticket-escalated
-$ go run ./examples/create-ticket-escalated-p1
+$ go run ./examples/9-create-ticket-escalated-p1
 ```
 
 You should update the details to use a new ticket number each time.
@@ -82,18 +69,12 @@ This demonstrates the use of a helper function and the equivalent PushUpdate fun
 
 ### TSP Codes
 
-This provides an example of retrieving the TSP codes. It will show the first 5 and then output the total number
-of TSP codes available.
+This provides an example of retrieving the TSP codes. It will output the total number
+of TSP codes available and save them to a CSV. Optionaly you can specify to save as json.
 
 ```sh
-$ go run ./examples/tsp
-2022/07/21 10:07:09 5
-Data Center and Storage Networking      Data Center Network Manager (DCNM)      Specializations Certifications
-Data Center and Storage Networking      Data Center Network Manager (DCNM)      Subscription Management / Billing
-Data Center and Storage Networking      Data Center Network Manager (DCNM)      Software Failure
-Data Center and Storage Networking      Data Center Network Manager (DCNM)      Software Selection/Download Assistance
-Data Center and Storage Networking      Data Center Network Manager (DCNM)      Portal Performance
-2022/07/21 10:07:17 4460
+$ go run ./examples/1-tsp
+Retrieved 19078 codes
 ```
 
 ### Pull Update

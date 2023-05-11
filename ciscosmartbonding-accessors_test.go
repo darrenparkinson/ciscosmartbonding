@@ -6,7 +6,6 @@
 package ciscosmartbonding
 
 import "testing"
-
 func TestAttachmentsHolder_GetDataBase64(tt *testing.T) {
 	var zeroValue string
 	a := &AttachmentsHolder{DataBase64: &zeroValue}
@@ -3297,17 +3296,14 @@ func TestInboundCallsHolder_GetProviderScheduledStartTime(tt *testing.T) {
 }
 
 func TestInboundCallsHolder_GetRemarks(tt *testing.T) {
-	var zeroValue string
-	i := &InboundCallsHolder{Remarks: &zeroValue}
-	i.GetRemarks()
-	i = &InboundCallsHolder{}
+	i := &InboundCallsHolder{}
 	i.GetRemarks()
 	i = nil
 	i.GetRemarks()
 }
 
 func TestInboundCallsHolder_GetSDCallID(tt *testing.T) {
-	var zeroValue float32
+	var zeroValue string
 	i := &InboundCallsHolder{SDCallID: &zeroValue}
 	i.GetSDCallID()
 	i = &InboundCallsHolder{}
@@ -3770,36 +3766,6 @@ func TestIntegerKeyField_GetValue(tt *testing.T) {
 	i.GetValue()
 }
 
-func TestListParams_GetLimit(tt *testing.T) {
-	var zeroValue int64
-	l := &ListParams{Limit: &zeroValue}
-	l.GetLimit()
-	l = &ListParams{}
-	l.GetLimit()
-	l = nil
-	l.GetLimit()
-}
-
-func TestListParams_GetMaxId(tt *testing.T) {
-	var zeroValue int64
-	l := &ListParams{MaxId: &zeroValue}
-	l.GetMaxId()
-	l = &ListParams{}
-	l.GetMaxId()
-	l = nil
-	l.GetMaxId()
-}
-
-func TestListParams_GetSinceId(tt *testing.T) {
-	var zeroValue int64
-	l := &ListParams{SinceId: &zeroValue}
-	l.GetSinceId()
-	l = &ListParams{}
-	l.GetSinceId()
-	l = nil
-	l.GetSinceId()
-}
-
 func TestLocationsHolder_GetShortName(tt *testing.T) {
 	var zeroValue string
 	l := &LocationsHolder{ShortName: &zeroValue}
@@ -4121,7 +4087,10 @@ func TestTspCode_GetEditTimeUtc(tt *testing.T) {
 }
 
 func TestTspCode_GetId(tt *testing.T) {
-	t := &TspCode{}
+	var zeroValue int64
+	t := &TspCode{Id: &zeroValue}
+	t.GetId()
+	t = &TspCode{}
 	t.GetId()
 	t = nil
 	t.GetId()

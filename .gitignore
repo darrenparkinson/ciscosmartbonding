@@ -5,8 +5,12 @@ archive/
 openapi/
 coverage/
 cmd/sbcli/
-tsp-codes.json
+tsp-codes.*json
+tsp-codes.*csv
 testdata-internal/
+bin/
+tmp/
+
 # Created by https://www.toptal.com/developers/gitignore/api/go,visualstudiocode,vim,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,visualstudiocode,vim,windows,macos
 

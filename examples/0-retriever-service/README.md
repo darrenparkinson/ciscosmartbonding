@@ -8,7 +8,7 @@ Future updates could include sending the updates to the service desk or to a mes
 
 You will need the following environment variables:
 
-* `SMART_BONDING_USERNAME` - the user name given to access the service
-* `SMART_BONDING_PASSWORD` - the associated password for the username
+* `SMART_BONDING_CLIENTID` - the client id given to access the service
+* `SMART_BONDING_SECRET` - the associated secret for the client id
 
 > Note: these can be provided in a `.env` file.

@@ -11,17 +11,16 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"net/url"
-	"strconv"
 	"sync"
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/google/go-querystring/query"
 	"golang.org/x/time/rate"
 )
 
-const apiURL = "https://cisco-test.solvedirect.com/ws/"
+// const apiURL = "https://cisco-test.solvedirect.com/ws/"
+const apiURL = "https://stage.sbnprd.xylem.cisco.com/sb-partner-oauth-proxy-api/"
+const tokenURL = "https://cloudsso.cisco.com/as/token.oauth2"
 
 type token struct {
 	AccessToken string    `json:"access_token"`
@@ -40,7 +39,9 @@ type ciscoautherror struct {
 // CiscoError represents the cisco error we might get back from Cisco for requests
 type CiscoError struct {
 	Message string `json:"message"`
-	Status  int    `json:"status"`
+	//TODO: They have on occasion sent an int instead of string, so we might need to cater for that
+	// Status  int    `json:"status"`
+	Status string `json:"status"`
 }
 
 // Client manages communication with the Cisco Smart Bonding API.
@@ -49,8 +50,8 @@ type Client struct {
 	//RestyClient provides access to the resty client for using extra features
 	RestyClient *resty.Client
 
-	username string
-	password string
+	clientID string
+	secret   string
 
 	token *token
 	mu    sync.Mutex
@@ -60,7 +61,7 @@ type Client struct {
 
 // NewClient creates a new API client.  You can pass in your own resty client, or use nil for a default one.
 // You can change the default test base URL after initialisation using client.RestyClient.SetBaseURL.
-func NewClient(username, password string, r *resty.Client) *Client {
+func NewClient(clientID, secret string, r *resty.Client) *Client {
 	if r == nil {
 		r = resty.New()
 	}
@@ -72,59 +73,19 @@ func NewClient(username, password string, r *resty.Client) *Client {
 	return &Client{
 		RestyClient: r,
 		lim:         rl,
-		username:    username,
-		password:    password,
+		clientID:    clientID,
+		secret:      secret,
 	}
 
 }
 
-func getNextLink(links []Link) (*ListParams, error) {
-	for _, l := range links {
-		if l.Rel == "next" {
-			u, err := url.Parse(l.HRef)
-			if err != nil {
-				return nil, err
-			}
-			qp := u.Query()
-			lp := &ListParams{}
-			if v, ok := qp["max_id"]; ok {
-				id, err := strconv.ParseInt(v[0], 10, 64)
-				if err != nil {
-					return nil, fmt.Errorf("error parsing max_id: %s", err)
-				}
-				lp.MaxId = Int64(id)
-			}
-			if v, ok := qp["limit"]; ok {
-				lim, err := strconv.ParseInt(v[0], 10, 64)
-				if err != nil {
-					return nil, fmt.Errorf("error parsing limit: %s", err)
-				}
-				lp.Limit = Int64(lim)
-			}
-			if lp.GetMaxId() == 0 || lp.GetLimit() == 0 {
-				return nil, errors.New("missing max id or limit in next link")
-			}
-			return lp, nil
-		}
-	}
-	return nil, nil
-}
-
-func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}, listParams ...*ListParams) error {
+func (c *Client) makeListRequest(ctx context.Context, slug string, v interface{}) error {
 	err := c.checkLimitAndGetToken(ctx)
 	if err != nil {
 		return err
 	}
-	listParamsString := url.Values{}
-	if len(listParams) > 0 {
-		listParamsString, err = query.Values(listParams[0])
-	}
-	if err != nil {
-		return fmt.Errorf("%w: %s", ErrProcessingListParams, err)
-	}
 	resp, err := c.RestyClient.R().
 		SetContext(ctx).
-		SetQueryString(listParamsString.Encode()).
 		SetResult(&v).
 		SetError(&CiscoError{}).
 		Get(slug)
@@ -191,12 +152,11 @@ func (c *Client) generateAuthToken() (*token, error) {
 	var t token
 	var e ciscoautherror
 	_, err := c.RestyClient.R().
-		SetQueryParams(map[string]string{"grant_type": "client_credentials"}).
-		SetBasicAuth(c.username, c.password).
-		SetHeader("Content-Type", "application/x-www-form-urlencoded").
+		SetQueryParams(map[string]string{"grant_type": "client_credentials", "client_id": c.clientID, "client_secret": c.secret}).
+		SetHeader("Content-Type", "application/json").
 		SetResult(&t).
 		SetError(&e).
-		Post("/rest/oauth/token")
+		Post(tokenURL)
 
 	if err != nil {
 		return &t, err
@@ -225,6 +185,10 @@ func Int32(v int32) *int32 { return &v }
 // Int64 is a helper routine that allocates a new int64 value
 // to store v and returns a pointer to it.
 func Int64(v int64) *int64 { return &v }
+
+// Float32 is a helper routine that allocates a new Float32 value
+// to store v and returns a pointer to it.
+func Float32(v float32) *float32 { return &v }
 
 // Float64 is a helper routine that allocates a new Float64 value
 // to store v and returns a pointer to it.

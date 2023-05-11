@@ -2917,18 +2917,18 @@ func (i *InboundCallsHolder) GetProviderScheduledStartTime() *CiscoDateTime {
 	return i.ProviderScheduledStartTime
 }
 
-// GetRemarks returns the Remarks field if it's non-nil, zero value otherwise.
-func (i *InboundCallsHolder) GetRemarks() string {
-	if i == nil || i.Remarks == nil {
-		return ""
+// GetRemarks returns the Remarks field.
+func (i *InboundCallsHolder) GetRemarks() *StringOrSliceOfErrors {
+	if i == nil {
+		return nil
 	}
-	return *i.Remarks
+	return i.Remarks
 }
 
 // GetSDCallID returns the SDCallID field if it's non-nil, zero value otherwise.
-func (i *InboundCallsHolder) GetSDCallID() float32 {
+func (i *InboundCallsHolder) GetSDCallID() string {
 	if i == nil || i.SDCallID == nil {
-		return 0
+		return ""
 	}
 	return *i.SDCallID
 }
@@ -3301,30 +3301,6 @@ func (i *IntegerKeyField) GetValue() *int32 {
 	return i.Value
 }
 
-// GetLimit returns the Limit field if it's non-nil, zero value otherwise.
-func (l *ListParams) GetLimit() int64 {
-	if l == nil || l.Limit == nil {
-		return 0
-	}
-	return *l.Limit
-}
-
-// GetMaxId returns the MaxId field if it's non-nil, zero value otherwise.
-func (l *ListParams) GetMaxId() int64 {
-	if l == nil || l.MaxId == nil {
-		return 0
-	}
-	return *l.MaxId
-}
-
-// GetSinceId returns the SinceId field if it's non-nil, zero value otherwise.
-func (l *ListParams) GetSinceId() int64 {
-	if l == nil || l.SinceId == nil {
-		return 0
-	}
-	return *l.SinceId
-}
-
 // GetShortName returns the ShortName field if it's non-nil, zero value otherwise.
 func (l *LocationsHolder) GetShortName() string {
 	if l == nil || l.ShortName == nil {
@@ -3581,12 +3557,12 @@ func (t *TspCode) GetEditTimeUtc() string {
 	return *t.EditTimeUtc
 }
 
-// GetId returns the Id field.
-func (t *TspCode) GetId() *int32 {
-	if t == nil {
-		return nil
+// GetId returns the Id field if it's non-nil, zero value otherwise.
+func (t *TspCode) GetId() int64 {
+	if t == nil || t.Id == nil {
+		return 0
 	}
-	return t.Id
+	return *t.Id
 }
 
 // GetProblemCodeDescription returns the ProblemCodeDescription field if it's non-nil, zero value otherwise.
