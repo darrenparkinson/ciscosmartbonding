@@ -27,12 +27,12 @@ func main() {
 			CustomerReasonCategory2: ciscosmartbonding.String("Business Edition 6000 series / 7000 series with UCM"),
 			// CustomerReasonCategory3: ciscosmartbonding.String("INSTLL_UNSTLL_UPGRD"),
 			CustomerReasonCategory3: ciscosmartbonding.String("Install, uninstall, or Upgrade"),
-			Caller: &ciscosmartbonding.PersonsHolder{
-				LastName:  ciscosmartbonding.String("Sampler"),
-				FirstName: ciscosmartbonding.String("William"),
-				// Title:     ciscosmartbonding.String("ACME Inc."),
-				EMail: ciscosmartbonding.String("wsampler@company.com"),
-			},
+			// Caller: &ciscosmartbonding.PersonsHolder{
+			// 	LastName:  ciscosmartbonding.String("Sampler"),
+			// 	FirstName: ciscosmartbonding.String("William"),
+			// 	// Title:     ciscosmartbonding.String("ACME Inc."),
+			// 	EMail: ciscosmartbonding.String("wsampler@company.com"),
+			// },
 			CHD: &ciscosmartbonding.PersonsHolder{
 				LastName:  ciscosmartbonding.String(last),
 				FirstName: ciscosmartbonding.String(first),
@@ -45,7 +45,7 @@ func main() {
 				Room:      ciscosmartbonding.String(productID),
 				SerNrProv: ciscosmartbonding.String(serialNo),
 				InvNr:     ciscosmartbonding.String(contractID),
-				Location:  ciscosmartbonding.String(siteID),
+				// Location:  ciscosmartbonding.String(siteID),
 			},
 			// SubComp: &ciscosmartbonding.ComponentsHolder{
 			// 	LocationName:     ciscosmartbonding.String("Suite 112/Gate 09"),
