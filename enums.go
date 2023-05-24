@@ -2,7 +2,6 @@ package ciscosmartbonding
 
 import (
 	"encoding/json"
-	"fmt"
 	"strings"
 )
 
@@ -10,7 +9,7 @@ import (
 type CloseTicketComplexity int64
 
 const (
-	Level0Procedural CloseTicketComplexity = iota
+	Level0Procedural CloseTicketComplexity = iota // assume zero value is fine
 	Level1Basic
 	Level2Advanced
 	Level3ExceptionallyComplex
@@ -55,7 +54,8 @@ func ParseComplexity(c string) (CloseTicketComplexity, error) {
 	c = strings.TrimSpace(c)
 	val, ok := CloseTicketComplexity_value[c]
 	if !ok {
-		return CloseTicketComplexity(0), fmt.Errorf("%q is not a valid CloseTicketComplexity", c)
+		return CloseTicketComplexity(0), nil
+		// return CloseTicketComplexity(0), fmt.Errorf("%q is not a valid CloseTicketComplexity", c)
 	}
 	return CloseTicketComplexity(val), nil
 }
@@ -211,7 +211,8 @@ func ParseResolution(r string) (CloseTicketResolutionCode, error) {
 	r = strings.TrimSpace(r)
 	val, ok := CloseTicketResolutionCode_value[r]
 	if !ok {
-		return CloseTicketResolutionCode(0), fmt.Errorf("%q is not a valid CloseTicketResolutionCode", r)
+		return CloseTicketResolutionCode(0), nil
+		// return CloseTicketResolutionCode(0), fmt.Errorf("%q is not a valid CloseTicketResolutionCode", r)
 	}
 	return CloseTicketResolutionCode(val), nil
 }
@@ -295,7 +296,8 @@ func ParseCause(u string) (CloseTicketUnderlyingCause, error) {
 	u = strings.TrimSpace(u)
 	val, ok := CloseTicketUnderlyingCause_value[u]
 	if !ok {
-		return CloseTicketUnderlyingCause(0), fmt.Errorf("%q is not a valid CloseTicketUnderlyingCause", u)
+		return CloseTicketUnderlyingCause(0), nil
+		// return CloseTicketUnderlyingCause(0), fmt.Errorf("%q is not a valid CloseTicketUnderlyingCause", u)
 	}
 	return CloseTicketUnderlyingCause(val), nil
 }
