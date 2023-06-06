@@ -134,20 +134,20 @@ func TestUnderlyingCauseEnum(t *testing.T) {
 		enum CloseTicketUnderlyingCause
 		text string
 	}{
-		{"Unknown Cause/Other", UnderlyingCause_UnknownCauseOther, "Unknown Cause/Other"},
+		{"Unknown Cause/Other", UnderlyingCause_UnknownCauseOther, "Unknown Cause/Other (Use ONLY if none of the above apply)"},
 		{"Licensing", UnderlyingCause_Licensing, "Licensing"},
 		{"Hardware Failure", UnderlyingCause_HardwareFailure, "Hardware Failure"},
-		{"Hardware - non-failure", UnderlyingCause_HardwareNonFailure, "Hardware - non-failure"},
+		{"Hardware - non-failure", UnderlyingCause_HardwareNonFailure, "Hardware - non-failure (limits exceeded, not enough memory, missing parts...)"},
 		{"Software Bug", UnderlyingCause_SoftwareBug, "Software Bug"},
-		{"Software -not a bug", UnderlyingCause_SoftwareNotABug, "Software -not a bug"},
-		{"Documentation/Tools", UnderlyingCause_DocumentationTools, "Documentation/Tools"},
-		{"Debug/Diagnostic Capabilities", UnderlyingCause_DebugDiagnosticCapabilities, "Debug/Diagnostic Capabilities"},
-		{"Design Assistance Needed", UnderlyingCause_DesignAssistanceNeeded, "Design Assistance Needed"},
-		{"Configuration Assistance", UnderlyingCause_ConfigurationAssistance, "Configuration Assistance"},
-		{"Usability -other than config", UnderlyingCause_UsabilityOtherThanConfig, "Usability -other than config"},
-		{"Interoperability/Compatibility", UnderlyingCause_InteroperabilityCompatibility, "Interoperability/Compatibility"},
-		{"Non-Cisco product or service problem", UnderlyingCause_NonCiscoProductOrServiceProblem, "Non-Cisco product or service problem"},
-		{"External Environment issue", UnderlyingCause_ExternalEnvironmentIssue, "External Environment issue"},
+		{"Software -not a bug", UnderlyingCause_SoftwareNotABug, "Software -not a bug (scalability, version selection, install/upgrade help...)"},
+		{"Documentation/Tools", UnderlyingCause_DocumentationTools, "Documentation/Tools (incomplete, too complex...)"},
+		{"Debug/Diagnostic Capabilities", UnderlyingCause_DebugDiagnosticCapabilities, "Debug/Diagnostic Capability (missing, incomplete, cryptic...)"},
+		{"Design Assistance Needed", UnderlyingCause_DesignAssistanceNeeded, "Design Assistance Needed (best practices, deployment advice, redesign...)"},
+		{"Configuration Assistance", UnderlyingCause_ConfigurationAssistance, "Configuration Assistance (process not intuitive, too complex, inconsistent...)"},
+		{"Usability -other than config", UnderlyingCause_UsabilityOtherThanConfig, "Usability -other than config (product hard to use, no console port...)"},
+		{"Interoperability/Compatibility", UnderlyingCause_InteroperabilityCompatibility, "Interoperability/Compatibility (Cisco to Cisco or Cisco to 3rd Party)"},
+		{"Non-Cisco product or service problem", UnderlyingCause_NonCiscoProductOrServiceProblem, "Non-Cisco product or service problem (third party failure, telco...)"},
+		{"External Environment issue", UnderlyingCause_ExternalEnvironmentIssue, "External Environment Issue (power outage, heat, lightning...)"},
 	}
 
 	for _, tt := range tests {
