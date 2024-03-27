@@ -20,7 +20,8 @@ import (
 
 // const apiURL = "https://cisco-test.solvedirect.com/ws/"
 const apiURL = "https://stage.sbnprd.xylem.cisco.com/sb-partner-oauth-proxy-api/"
-const tokenURL = "https://cloudsso.cisco.com/as/token.oauth2"
+
+// const tokenURL = "https://cloudsso.cisco.com/as/token.oauth2"
 
 type token struct {
 	AccessToken string    `json:"access_token"`
@@ -50,6 +51,14 @@ type Client struct {
 	//RestyClient provides access to the resty client for using extra features
 	RestyClient *resty.Client
 
+	//TokenURL allows you to set your own token URL after initialising the client in case Cisco changes it
+	TokenURL string
+
+	//AuthType allows you to set the auth type after initialising the client in case Cisco changes it
+	//It should be one of "query" or "form" for sending the data as query parameters or x-www-form-urlencoded data
+	//respectively. Default is query for the old authentication.
+	AuthType string
+
 	clientID string
 	secret   string
 
@@ -72,6 +81,8 @@ func NewClient(clientID, secret string, r *resty.Client) *Client {
 
 	return &Client{
 		RestyClient: r,
+		TokenURL:    "https://cloudsso.cisco.com/as/token.oauth2",
+		AuthType:    "query",
 		lim:         rl,
 		clientID:    clientID,
 		secret:      secret,
@@ -151,15 +162,29 @@ func (c *Client) getToken() error {
 func (c *Client) generateAuthToken() (*token, error) {
 	var t token
 	var e ciscoautherror
-	_, err := c.RestyClient.R().
-		SetQueryParams(map[string]string{"grant_type": "client_credentials", "client_id": c.clientID, "client_secret": c.secret}).
-		SetHeader("Content-Type", "application/json").
-		SetResult(&t).
-		SetError(&e).
-		Post(tokenURL)
 
-	if err != nil {
-		return &t, err
+	if c.AuthType == "form" {
+		_, err := c.RestyClient.R().
+			SetFormData(map[string]string{"grant_type": "client_credentials", "client_id": c.clientID, "client_secret": c.secret}).
+			SetHeader("Content-Type", "application/x-www-form-urlencoded").
+			SetResult(&t).
+			SetError(&e).
+			Post(c.TokenURL)
+
+		if err != nil {
+			return &t, err
+		}
+	} else {
+		_, err := c.RestyClient.R().
+			SetQueryParams(map[string]string{"grant_type": "client_credentials", "client_id": c.clientID, "client_secret": c.secret}).
+			SetHeader("Content-Type", "application/json").
+			SetResult(&t).
+			SetError(&e).
+			Post(c.TokenURL)
+
+		if err != nil {
+			return &t, err
+		}
 	}
 	// so a 401 isn't actually an error of course
 	// we will still need to check the response
